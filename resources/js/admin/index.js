@@ -1,0 +1,9 @@
+import './admin-user';
+import './profile-edit-profile';
+import './profile-edit-password';
+import './user';
+import './option';
+import './rule';
+import './field';
+import './field-type';
+import './campaign';
