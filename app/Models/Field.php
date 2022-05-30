@@ -34,6 +34,12 @@ class Field extends Model
         return $this->belongsToMany('App\Models\Option');
     }
 
+    /* m:m */
+    public function campaigns()
+    {
+        return $this->belongsToMany('App\Models\Campaign');
+    }
+
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
