@@ -22,7 +22,7 @@ class Campaign extends Model
     /* m:m */
     public function fields()
     {
-        return $this->belongsToMany('App\Models\Field');
+        return $this->belongsToMany('App\Models\Field')->withPivot('id');
     }
 
     protected $appends = ['resource_url'];
