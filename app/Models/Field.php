@@ -28,6 +28,12 @@ class Field extends Model
         return $this->belongsTo(FieldType::class, 'field_type_id');
     }
 
+    /* m:m */
+    public function options()
+    {
+        return $this->belongsToMany('App\Models\Option');
+    }
+
     /* ************************ ACCESSOR ************************* */
 
     public function getResourceUrlAttribute()
