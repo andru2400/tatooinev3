@@ -9,16 +9,22 @@ class FieldType extends Model
     protected $fillable = [
         'name',
         'description',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
+    /* 1:m */
+    public function fields()
+    {
+        return $this->hasMany(Field::class);
+    }
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
