@@ -18,7 +18,7 @@ class CreateCampaignFieldRuleTable extends Migration
 
             $table->bigInteger('campaign_field_id')->unsigned();
             $table->bigInteger('rule_id')->unsigned();
-            $table->string('value');
+            $table->string('value')->nullable();
 
             $table->foreign('campaign_field_id')->references('id')->on('campaign_field');
             $table->foreign('rule_id')->references('id')->on('rules');
