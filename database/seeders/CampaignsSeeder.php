@@ -16,10 +16,10 @@ class CampaignsSeeder extends Seeder
         DB::table('campaigns')->insert([
             [
              'id'               => '1',
-             'name'             => 'Campaña test - 1',
+             'name'             => 'Campaña test 1',
              'status'           => 1,
              'created_at'       => '2022-05-30 15:58:34',
-             'updated_at'       => '2022-05-30 15:58:34',
+             'updated_at'       => '2022-05-30 15:58:34'
             ],
        ]);
     }
