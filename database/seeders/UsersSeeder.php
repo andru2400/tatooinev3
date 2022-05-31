@@ -13,6 +13,17 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('users')->insert([
+            [
+             'id'               => '1',
+             'name'             => 'Andres',
+             'email'            => 'andres@bellpi.com',
+             'email_verified_at'=> null,
+             'password'         => bcrypt('Admin@digital'),
+             'remember_token'   => null,
+             'created_at'       => '2022-05-30 15:59:37',
+             'updated_at'       => '2022-05-30 15:59:37',
+            ],
+       ]);
     }
 }
