@@ -13,6 +13,10 @@ class CampaignFieldSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('campaign_field')->insert([
+            ["id"=>1,"campaign_id"=>1,"field_id"=>1],
+            ["id"=>2,"campaign_id"=>1,"field_id"=>2],
+            ["id"=>3,"campaign_id"=>1,"field_id"=>3]
+        ]);
     }
 }
