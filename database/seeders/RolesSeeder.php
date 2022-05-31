@@ -13,6 +13,17 @@ class RolesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('roles')->insert([
+            [
+             'id'               => '1',
+             'name'             => 'Administrador',
+             'guard_name'       => 'admin',
+             'created_at'       => '2022-05-29 20:35:34',
+             'updated_at'       => '2022-05-29 20:35:34',
+            ],
+       ]);
+
+
+
     }
 }
