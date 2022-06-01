@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 use App\Models\FieldType;
+use App\Models\Option;
 
 class FieldsController extends Controller
 {
@@ -67,8 +68,13 @@ class FieldsController extends Controller
     {
         $this->authorize('admin.field.create');
         $field_types = FieldType::get();
+        $options = Option::get();
 
-        return view('admin.field.create', ['field_types' => $field_types]);
+        return view('admin.field.create',
+        [
+            'field_types' => $field_types,
+            'options' => $options,
+        ]);
     }
 
     /**
@@ -84,6 +90,11 @@ class FieldsController extends Controller
 
         // Store the Field
         $field = Field::create($sanitized);
+
+        // pivot options
+        if ($request->input('options')) {
+            $field->options()->sync(collect($request->input('options', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/fields'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -116,11 +127,16 @@ class FieldsController extends Controller
     public function edit(Field $field)
     {
         $this->authorize('admin.field.edit', $field);
+        $field->load('options');
+
         $field_types = FieldType::get();
+        $options = Option::get();
 
         return view('admin.field.edit', [
             'field' => $field,
             'field_types' => $field_types,
+            'options' => $options
+            // 'options' => Option::where('guard_name', $this->guard)->get(),
         ]);
     }
 
@@ -138,6 +154,11 @@ class FieldsController extends Controller
 
         // Update changed values Field
         $field->update($sanitized);
+
+        // pivot options
+        if ($request->input('options')) {
+            $field->options()->sync(collect($request->input('options', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return [
