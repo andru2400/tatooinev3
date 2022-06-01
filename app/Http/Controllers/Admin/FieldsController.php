@@ -20,6 +20,8 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
+use App\Models\FieldType;
+
 class FieldsController extends Controller
 {
 
@@ -113,10 +115,11 @@ class FieldsController extends Controller
     public function edit(Field $field)
     {
         $this->authorize('admin.field.edit', $field);
-
+        $field_types = FieldType::get();
 
         return view('admin.field.edit', [
             'field' => $field,
+            'field_types' => $field_types,
         ]);
     }
 
