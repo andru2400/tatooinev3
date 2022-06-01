@@ -19,6 +19,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -80,6 +81,7 @@ class UsersController extends Controller
         $sanitized = $request->getSanitized();
 
         // Store the User
+        $sanitized['password'] = Hash::make($sanitized['password']);
         $user = User::create($sanitized);
 
         if ($request->ajax()) {
@@ -131,6 +133,7 @@ class UsersController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        $sanitized['password'] = Hash::make($sanitized['password']);
 
         // Update changed values User
         $user->update($sanitized);

@@ -11,6 +11,7 @@
         <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         {{-- <input type="text" v-model="form.field_type_id" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('field_type_id'), 'form-control-success': fields.field_type_id && fields.field_type_id.valid}" id="field_type_id" name="field_type_id" placeholder="{{ trans('admin.field.columns.field_type_id') }}"> --}}
         <select v-model="form.field_type_id" v-validate="'required'" @input="validate($event)" class="form-control" :class="{'form-control-danger': errors.has('field_type_id'), 'form-control-success': fields.field_type_id && fields.field_type_id.valid}" id="field_type_id" name="field_type_id">
+                <option disabled value="">Seleccione ...</option>
             @foreach($field_types as $item)
                 <option value="{{$item->id}}">{{$item->description}}</option>
             @endforeach

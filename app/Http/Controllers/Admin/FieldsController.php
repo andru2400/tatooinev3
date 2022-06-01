@@ -66,8 +66,9 @@ class FieldsController extends Controller
     public function create()
     {
         $this->authorize('admin.field.create');
+        $field_types = FieldType::get();
 
-        return view('admin.field.create');
+        return view('admin.field.create', ['field_types' => $field_types]);
     }
 
     /**
