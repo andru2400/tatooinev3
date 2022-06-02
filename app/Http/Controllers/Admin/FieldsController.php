@@ -128,7 +128,7 @@ class FieldsController extends Controller
     {
         $this->authorize('admin.field.edit', $field);
         $field->load('options');
-
+        $field->field_type_id = (string)$field->field_type_id;
         $field_types = FieldType::get();
         $options = Option::get();
 
