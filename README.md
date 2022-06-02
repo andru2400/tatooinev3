@@ -12,7 +12,7 @@
 ## About Laravel
 
 ## Initial commands for product deployment !
-- php artisan migrate && php artisan db:seed && php artisan passport:install
+- composer update && php artisan migrate && php artisan db:seed && php artisan passport:install
 
 ## email administrator@brackets.sk
 ## pass  a5r9i4apWO

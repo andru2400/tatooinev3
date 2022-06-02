@@ -20,6 +20,8 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
+use App\Models\Field;
+
 class CampaignsController extends Controller
 {
 
@@ -82,6 +84,11 @@ class CampaignsController extends Controller
         // Store the Campaign
         $campaign = Campaign::create($sanitized);
 
+        // pivot options
+        if ($request->input('options')) {
+            $campaign->fields()->sync(collect($request->input('fields', []))->map->id->toArray());
+        }
+
         if ($request->ajax()) {
             return ['redirect' => url('admin/campaigns'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
@@ -113,10 +120,12 @@ class CampaignsController extends Controller
     public function edit(Campaign $campaign)
     {
         $this->authorize('admin.campaign.edit', $campaign);
-
+        $campaign->load('fields');
+        $fields = Field::get();
 
         return view('admin.campaign.edit', [
             'campaign' => $campaign,
+            'fields' => $fields
         ]);
     }
 
@@ -134,6 +143,11 @@ class CampaignsController extends Controller
 
         // Update changed values Campaign
         $campaign->update($sanitized);
+
+        // pivot options
+        if ($request->input('options')) {
+            $campaign->fields()->sync(collect($request->input('fields', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return [
