@@ -31,20 +31,5 @@ class DatabaseSeeder extends Seeder
         $this->call(OptionsSeeder::class);
         $this->call(FieldOptionSeeder::class);
 
-        // admin_users                      - AdminUsersSeeder
-        // users                            - UsersSeeder
-        // roles                            - RolesSeeder
-        // model_has_roles                  - ModelHasRolesSeeder
-        // permissions                      - PermissionsSeeder
-        // role_has_permissions  *Relation  - RoleHasPermissionsSeeder
-        // translations                     - TranslationsSeeder
-        // campaigns                        - CampaignsSeeder
-        // field_types                      - FieldTypesSeeder
-        // fields     *Relation             - FieldsSeeder
-        // campaign_field *Relation         - CampaignFieldSeeder
-        // rules                            - RulesSeeder
-        // campaign_field_rule *Relation    - CampaignFieldRuleSeeder
-        // options                          - OptionsSeeder
-        // field_option *Relation           - FieldOptionSeeder
     }
 }
