@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class PermissionsSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('model_has_roles')->insert([
+        DB::table('permissions')->insert([
             ["id" =>1,"name" =>"admin","guard_name" =>"admin","created_at" =>"2022-05-29 20:35:34","updated_at" =>"2022-05-29 20:35:34"],
             ["id" =>2,"name" =>"admin.translation.index","guard_name" =>"admin","created_at" =>"2022-05-29 20:35:34","updated_at" =>"2022-05-29 20:35:34"],
             ["id" =>3,"name" =>"admin.translation.edit","guard_name" =>"admin","created_at" =>"2022-05-29 20:35:34","updated_at" =>"2022-05-29 20:35:34"],

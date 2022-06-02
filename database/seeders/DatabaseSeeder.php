@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $this->call(AdminUsersSeeder::class);
+        // $this->call(AdminUsersSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(RolesSeeder::class);
-        $this->call(ModelHasRolesSeeder::class);
-        $this->call(PermissionsSeeder::class);
-        $this->call(RoleHasPermissionsSeeder::class);
+        // $this->call(RolesSeeder::class);
+        // $this->call(ModelHasRolesSeeder::class);
+        // $this->call(PermissionsSeeder::class);
+        // $this->call(RoleHasPermissionsSeeder::class);
         $this->call(TranslationsSeeder::class);
         $this->call(CampaignsSeeder::class);
         $this->call(FieldTypesSeeder::class);
