@@ -120,6 +120,11 @@ class RolesController extends Controller
         ]);
     }
 
+    public function permissions(Role $role)
+    {
+
+    }
+
     /**
      * Update the specified resource in storage.
      *

@@ -145,6 +145,9 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'RolesController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{role}',                                      'RolesController@update')->name('update');
             Route::delete('/{role}',                                    'RolesController@destroy')->name('destroy');
+
+            Route::get('/{role}/permissions',                           'RolesController@permissions')->name('permissions');
+            Route::get('/{role}/permissions/{permission}',              'RolesController@permissionDestroy')->name('permission-destroy');
         });
     });
 });

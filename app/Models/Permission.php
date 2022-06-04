@@ -9,16 +9,22 @@ class Permission extends Model
     protected $fillable = [
         'name',
         'guard_name',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
+    /* m:m */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Models\Role', 'role_has_permissions');
+    }
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
