@@ -87,3 +87,25 @@ $factory->define(App\Models\Campaign::class, static function (Faker\Generator $f
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Role::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'guard_name' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Permission::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'guard_name' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

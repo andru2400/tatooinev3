@@ -7,3 +7,5 @@ import './rule';
 import './field';
 import './field-type';
 import './campaign';
+import './role';
+import './permission';

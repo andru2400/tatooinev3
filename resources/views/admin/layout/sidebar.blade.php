@@ -8,6 +8,8 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/fields') }}"><i class="nav-icon icon-umbrella"></i> {{ trans('admin.field.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/field-types') }}"><i class="nav-icon icon-umbrella"></i> {{ trans('admin.field-type.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/campaigns') }}"><i class="nav-icon icon-magnet"></i> {{ trans('admin.campaign.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/roles') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.role.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/permissions') }}"><i class="nav-icon icon-graduation"></i> {{ trans('admin.permission.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
