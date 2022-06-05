@@ -9,6 +9,11 @@ Vue.component('role-permission-listing', {
     created: function(){
     //
     },
+    data: function(){
+        return {
+            newPermission:''
+        }
+    },
     methods:{
         deleteItemById: function(idRole, idPermission) {
             var _this7 = this;
@@ -31,5 +36,17 @@ Vue.component('role-permission-listing', {
                 }]
             });
         },
+        addPermission: function(){
+            var service = '/admin/roles/'+this.data[0].id+'/permissions/add';
+            var formData = new FormData();
+			formData.append("namePermission", this.newPermission);
+            var self = this;
+            axios.post(service,formData).then(function (response) {
+                self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
+                location.reload();
+            }, function (error) {
+                self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+            });
+        }
     }
 });

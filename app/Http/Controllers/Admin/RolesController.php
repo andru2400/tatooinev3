@@ -153,6 +153,29 @@ class RolesController extends Controller
 
     }
 
+    public function addPermissions(Role $role, IndexRole $request){
+        $permission_temp = Permission::where('name',$request->namePermission)->first();
+        if($permission_temp){
+            try {
+                $role->permissions()->attach($permission_temp->id);
+                if ($request->ajax()) {
+                    return ['message' => 'Se agrego exitosamente el permiso'];
+                }
+                return redirect()->back();
+            } catch (\Throwable $th) {
+                if ($request->ajax()) {
+                    abort(409, 'El permiso ingresado ya existe');
+                }
+                return redirect()->back();
+            }
+        }else{
+            if ($request->ajax()) {
+                abort(400, 'El permiso ingresado no existe');
+            }
+            return redirect()->back();
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *

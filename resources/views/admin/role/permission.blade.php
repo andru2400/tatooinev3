@@ -19,6 +19,18 @@
                     </div>
                     <div class="card-body" v-cloak>
                         <div class="card-block">
+                            <form @submit.prevent="addPermission()">
+                                <div class="row justify-content-md-between">
+                                    <div class="col col-lg-7 col-xl-5 form-group">
+                                        <div class="input-group">
+                                            <input class="form-control" placeholder="Escriba nuevo permiso" v-model="newPermission"/>
+                                            <span class="input-group-append">
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp; Agregar Permiso</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <table class="table table-hover table-listing">
                                 <thead>
                                     <tr>
