@@ -8,7 +8,9 @@ use App\Http\Requests\Admin\Role\DestroyRole;
 use App\Http\Requests\Admin\Role\IndexRole;
 use App\Http\Requests\Admin\Role\StoreRole;
 use App\Http\Requests\Admin\Role\UpdateRole;
+use App\Models\Permission;
 use App\Models\Role;
+use App\Models\Role_permission;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -120,11 +122,11 @@ class RolesController extends Controller
         ]);
     }
 
-    public function permissions(IndexRole $request,Role $role)
+    public function permissions(Role $role)
     {
          // create and AdminListing instance for a specific model and
          $data = AdminListing::create(Role::class)
-         ->modifyQuery(function($query) use ($request, $role){
+         ->modifyQuery(function($query) use ($role){
             $query->where('id',$role->id);
             $query->with('permissions');
          })
@@ -133,6 +135,22 @@ class RolesController extends Controller
         return view('admin.role.permission', [
             'data' => $data,
         ]);
+    }
+
+    public function permissionDestroy(Role $role, Permission $permission){
+        // $permission_temp = Role_permission::where('permission_id', $permission->id)->where('role_id', $role->id)->first();
+        // $permission_temp->delete();
+        DB::table('role_has_permissions')
+        ->where('permission_id',$permission->id)
+        ->where('role_id',$role->id)
+        ->delete();
+
+        // if ($request->ajax()) {
+            // return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+        // }
+
+        // return redirect()->back();
+
     }
 
     /**

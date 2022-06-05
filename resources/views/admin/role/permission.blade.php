@@ -31,7 +31,7 @@
                                         <td>@{{ item.name }}</td>
                                         <td>
                                             <div class="row no-gutters">
-                                                <form class="col" @submit.prevent="deleteItem(item.resource_url)">
+                                                <form class="col" @submit.prevent="deleteItemById(data[0].id, item.id)">
                                                     <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </div>
