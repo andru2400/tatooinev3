@@ -14,4 +14,13 @@
     </div>
 </div>
 
+{{-- ok --}}
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('fields'), 'has-success': fields.fields && fields.fields.valid }">
+    <label for="fields" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.option.columns.fields') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <multiselect v-model="form.fields" placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id" :options="{{ $fields->toJson() }}" :multiple="true" open-direction="bottom"></multiselect>
+        <div v-if="errors.has('fields')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('fields') }}</div>
+    </div>
+</div>
+
 

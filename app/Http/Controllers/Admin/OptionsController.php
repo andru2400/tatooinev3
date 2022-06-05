@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Option\DestroyOption;
 use App\Http\Requests\Admin\Option\IndexOption;
 use App\Http\Requests\Admin\Option\StoreOption;
 use App\Http\Requests\Admin\Option\UpdateOption;
+use App\Models\Field;
 use App\Models\Option;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -64,8 +65,9 @@ class OptionsController extends Controller
     public function create()
     {
         $this->authorize('admin.option.create');
+        $fields = Field::get();
 
-        return view('admin.option.create');
+        return view('admin.option.create', ['fields' => $fields]);
     }
 
     /**
@@ -81,6 +83,11 @@ class OptionsController extends Controller
 
         // Store the Option
         $option = Option::create($sanitized);
+
+        // pivot options
+         if ($request->input('fields')) {
+            $option->fields()->sync(collect($request->input('fields', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/options'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -113,10 +120,12 @@ class OptionsController extends Controller
     public function edit(Option $option)
     {
         $this->authorize('admin.option.edit', $option);
-
+        $option->load('fields');
+        $fields = Field::get();
 
         return view('admin.option.edit', [
             'option' => $option,
+            'fields' => $fields
         ]);
     }
 
@@ -134,6 +143,11 @@ class OptionsController extends Controller
 
         // Update changed values Option
         $option->update($sanitized);
+
+        // pivot options
+        if ($request->input('fields')) {
+            $option->fields()->sync(collect($request->input('fields', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return [
