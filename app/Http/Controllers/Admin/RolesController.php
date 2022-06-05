@@ -120,9 +120,19 @@ class RolesController extends Controller
         ]);
     }
 
-    public function permissions(Role $role)
+    public function permissions(IndexRole $request,Role $role)
     {
+         // create and AdminListing instance for a specific model and
+         $data = AdminListing::create(Role::class)
+         ->modifyQuery(function($query) use ($request, $role){
+            $query->where('id',$role->id);
+            $query->with('permissions');
+         })
+         ->get();
 
+        return view('admin.role.permission', [
+            'data' => $data,
+        ]);
     }
 
     /**
