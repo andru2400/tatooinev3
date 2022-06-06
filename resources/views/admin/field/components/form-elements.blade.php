@@ -42,7 +42,7 @@
 <div class="form-group row align-items-center" :class="{'has-danger': errors.has('options'), 'has-success': fields.options && fields.options.valid }">
     <label for="options" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.field.columns.options') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-        <multiselect v-model="form.options" placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id" :options="{{ $options->toJson() }}" :multiple="true" open-direction="bottom"></multiselect>
+        <multiselect v-model="form.options" disabled placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id" :options="{{ $options->toJson() }}" :multiple="true" open-direction="bottom"></multiselect>
         <div v-if="errors.has('options')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('options') }}</div>
     </div>
 </div>
