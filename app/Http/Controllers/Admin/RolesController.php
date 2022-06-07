@@ -159,11 +159,8 @@ class RolesController extends Controller
         ->delete();
 
         // if ($request->ajax()) {
-            // return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+        return response(['message' => 'Se quito el permiso']);
         // }
-
-        // return redirect()->back();
-
     }
 
     public function addPermissions(Role $role, IndexRole $request){

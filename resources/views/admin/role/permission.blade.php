@@ -8,15 +8,14 @@
     :data="{{ $data->toJson() }}"
     :role="{{ $role }}"
     :rolepermission ="{{ $rolepermission }}"
-    :url="'{{ url('admin/roles/'.'1'.'/permissions') }}'" {{-- Arreglar --}}
+    :url="'{{ url('admin/roles/'.$role->id.'/permissions') }}'" {{-- Arreglar --}}
     inline-template>
     <div class="row">
         <div class="col">
             <div class="card">
-                {{-- <div class="card-header">
-                    <i class="fa fa-align-justify"></i> {{ trans('admin.permission.actions.index') }}
-                    <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" href="{{ url('admin/permissions/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.permission.actions.create') }}</a>
-                </div> --}}
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>Permisos de <span v-text="role.name"></span>
+                </div>
                 <div class="card-body" v-cloak>
                     <div class="card-block">
                         <form @submit.prevent="">
@@ -82,13 +81,13 @@
                                     <td>
                                         <td v-if="checkExistRole(item)">
                                             <label class="switch switch-3d switch-success">
-                                                <input type="checkbox" class="switch-input" checked="checked" @change="toggleSwitchPivot(item, role.id)">
+                                                <input type="checkbox" v-model="data[index].activated" class="switch-input" checked="checked" @change="toggleSwitchPivot(item, data[index].activated)">
                                                 <span class="switch-slider"></span>
                                             </label>
                                         </td>
                                         <td v-else>
-                                            <label class="switch switch-3d switch-danger">
-                                                <input type="checkbox" class="switch-input" @change="toggleSwitchPivot('change')">
+                                            <label class="switch switch-3d switch-success">
+                                                <input type="checkbox" v-model="data[index].activated" class="switch-input" @change="toggleSwitchPivot(item, data[index].activated)">
                                                 <span class="switch-slider"></span>
                                             </label>
                                         </td>

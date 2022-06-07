@@ -18,33 +18,32 @@ Vue.component('role-permission-listing', {
     methods:{
         deleteItemById: function(idRole, idPermission) {
             var _this7 = this;
-            this.$modal.show('dialog', {
-                title: 'Warning!',
-                text: 'Do you really want to delete this item?',
-                buttons: [{ title: 'No, cancel.' }, {
-                    title: '<span class="btn-dialog btn-danger">Yes, delete.<span>',
-                    handler: function handler() {
-                        _this7.$modal.hide('dialog');
-                        var service = '/admin/roles/'+idRole+'/permissions/'+idPermission;
-                        axios.delete(service).then(function (response) {
-                            location.reload();
-                            // _this7.loadData();
-                            // _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
-                        }, function (error) {
-                            _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
-                        });
-                    }
-                }]
+            var service = '/admin/roles/'+idRole+'/permissions/'+idPermission;
+            axios.delete(service).then(function (response) {
+                // location.reload();
+                // _this7.loadData();
+                _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
+            }, function (error) {
+                _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
             });
+            // this.$modal.show('dialog', {
+            //     title: 'Warning!',
+            //     text: 'Do you really want to delete this item?',
+            //     buttons: [{ title: 'No, cancel.' }, {
+            //         title: '<span class="btn-dialog btn-danger">Yes, delete.<span>',
+            //         handler: function handler() {
+            //             _this7.$modal.hide('dialog');
+            //         }
+            //     }]
+            // });
         },
-        addPermission: function(){
-            var service = '/admin/roles/'+this.data[0].id+'/permissions/add';
+        addPermission: function(name){
+            var service = '/admin/roles/'+this.role.id+'/permissions/add';
             var formData = new FormData();
-			formData.append("namePermission", this.newPermission);
+			formData.append("namePermission", name);
             var self = this;
             axios.post(service,formData).then(function (response) {
-                self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
-                location.reload();
+                self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Se agrego exitosamente' });
             }, function (error) {
                 self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
             });
@@ -56,6 +55,13 @@ Vue.component('role-permission-listing', {
             }else{
                 return false;
             }
-        }
+        },
+        toggleSwitchPivot: function(objPermission, action) {
+            if(action == true){         // ADD
+                this.addPermission(objPermission.name);
+            }else{                      // DEL
+                this.deleteItemById(this.role.id , objPermission.id);
+            }
+        },
     }
 });
