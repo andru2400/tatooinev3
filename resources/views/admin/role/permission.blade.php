@@ -70,7 +70,7 @@
                                 </tr> --}}
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in collection" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
+                                <tr v-for="(item, index) in data" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
                                     {{-- <td class="bulk-checkbox">
                                         <input class="form-check-input" :id="'enabled' + item.id" type="checkbox" v-model="bulkItems[item.id]" v-validate="''" :data-vv-name="'enabled' + item.id"  :name="'enabled' + item.id + '_fake_element'" @click="onBulkItemClicked(item.id)" :disabled="bulkCheckingAllLoader">
                                         <label class="form-check-label" :for="'enabled' + item.id">
@@ -115,7 +115,7 @@
                             </tbody>
                         </table>
 
-                        <div class="row" v-if="pagination.state.total > 0">
+                        {{-- <div class="row" v-if="pagination.state.total > 0">
                             <div class="col-sm">
                                 <span class="pagination-caption">{{ trans('brackets/admin-ui::admin.pagination.overview') }}</span>
                             </div>
@@ -129,7 +129,7 @@
                             <h3>{{ trans('brackets/admin-ui::admin.index.no_items') }}</h3>
                             <p>{{ trans('brackets/admin-ui::admin.index.try_changing_items') }}</p>
                             <a class="btn btn-primary btn-spinner" href="{{ url('admin/permissions/create') }}" role="button"><i class="fa fa-plus"></i>&nbsp; {{ trans('admin.permission.actions.create') }}</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
