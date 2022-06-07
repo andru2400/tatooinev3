@@ -50,11 +50,9 @@
                                     </th> --}}
 
                                     {{-- <th is='sortable' :column="'id'">{{ trans('admin.permission.columns.id') }}</th> --}}
-                                    <th is='sortable' :column="'name'">Nombre Permiso</th>
+                                    <th is='sortable' :column="'name'">{{ trans('admin.permission.columns.guard_name') }}</th>
                                     <th>Estado</th>
-                                    {{-- <th is='sortable' :column="'guard_name'">{{ trans('admin.permission.columns.guard_name') }}</th> --}}
 
-                                    <th></th>
                                 </tr>
                                 {{-- <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
                                     <td class="bg-bulk-info d-table-cell text-center" colspan="5">
@@ -78,26 +76,26 @@
 
                                     {{-- <td>@{{ item.id }}</td> --}}
                                     <td>@{{ item.name }}</td>
-                                    <td>
-                                        <td v-if="checkExistRole(item)">
-                                            <label class="switch switch-3d switch-success">
-                                                <input type="checkbox" v-model="data[index].activated" class="switch-input" checked="checked" @change="toggleSwitchPivot(item, data[index].activated)">
-                                                <span class="switch-slider"></span>
-                                            </label>
-                                        </td>
-                                        <td v-else>
-                                            <label class="switch switch-3d switch-success">
-                                                <input type="checkbox" v-model="data[index].activated" class="switch-input" @change="toggleSwitchPivot(item, data[index].activated)">
-                                                <span class="switch-slider"></span>
-                                            </label>
-                                        </td>
-                                        {{-- <div class="row no-gutters">
-                                            <label class="switch switch-3d switch-success">
-                                                <input type="checkbox" class="switch-input" v-model="collection[index].activated"  @change="toggleSwitchPivot(item)">
-                                                <span class="switch-slider"></span>
-                                            </label>
-                                        </div> --}}
+
+                                    <td v-if="checkExistRole(item)">
+                                        <label class="switch switch-3d switch-success">
+                                            <input type="checkbox" v-model="data[index].activated" class="switch-input" checked="checked" @change="toggleSwitchPivot(item, data[index].activated)">
+                                            <span class="switch-slider"></span>
+                                        </label>
                                     </td>
+                                    <td v-else>
+                                        <label class="switch switch-3d switch-success">
+                                            <input type="checkbox" v-model="data[index].activated" class="switch-input" @change="toggleSwitchPivot(item, data[index].activated)">
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                    </td>
+                                    {{-- <div class="row no-gutters">
+                                        <label class="switch switch-3d switch-success">
+                                            <input type="checkbox" class="switch-input" v-model="collection[index].activated"  @change="toggleSwitchPivot(item)">
+                                            <span class="switch-slider"></span>
+                                        </label>
+                                    </div> --}}
+
                                     {{-- <td v-if="activation">
                                         <label class="switch switch-3d switch-success">
                                             <input type="checkbox" class="switch-input" v-model="collection[index].activated" @change="toggleSwitch(item.resource_url, 'activated', collection[index])">
