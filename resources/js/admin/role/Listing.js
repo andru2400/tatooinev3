@@ -9,6 +9,7 @@ Vue.component('role-permission-listing', {
     created: function(){
     //
     },
+    props:['role','rolepermission'],
     data: function(){
         return {
             newPermission:''
@@ -47,6 +48,14 @@ Vue.component('role-permission-listing', {
             }, function (error) {
                 self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
             });
+        },
+        checkExistRole: function(item){ /* Sirve para pintar */
+            let exist = this.rolepermission.find(element => element.permission_id == item.id);
+            if(exist){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 });
