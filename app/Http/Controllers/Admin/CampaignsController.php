@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Campaign\IndexCampaign;
 use App\Http\Requests\Admin\Campaign\StoreCampaign;
 use App\Http\Requests\Admin\Campaign\UpdateCampaign;
 use App\Models\Campaign;
+use App\Models\Campaign_field;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -66,8 +67,9 @@ class CampaignsController extends Controller
     public function create()
     {
         $this->authorize('admin.campaign.create');
+        $fields = Field::get();
 
-        return view('admin.campaign.create');
+        return view('admin.campaign.create', ['fields' => $fields]);
     }
 
     /**
@@ -127,6 +129,70 @@ class CampaignsController extends Controller
             'campaign' => $campaign,
             'fields' => $fields
         ]);
+    }
+
+    public function fields(IndexCampaign $request,Campaign $campaign ){
+
+        // create and AdminListing instance for a specific model and
+         $data = AdminListing::create(Field::class)
+         // ->modifyQuery(function($query){
+         //     $query->with('roles');
+         //  })
+         ->get();
+         // ->processRequestAndGet(
+         //     // pass the request with params
+         //     $request,
+
+         //     // set columns to query
+         //     ['id', 'name', 'guard_name'],
+
+         //     // set columns to searchIn
+         //     ['id', 'name', 'guard_name']
+         // );
+
+         $campaignfield = Campaign_field::where('campaign_id', $campaign->id)->get();
+
+         return view('admin.campaign.field', [
+             'data' => $data,
+             'campaign' => $campaign,
+             'campaignfield' => $campaignfield,
+         ]);
+    }
+
+
+    public function fieldDestroy(Campaign $campaign,Field $field){
+
+        DB::table('campaign_field')
+        ->where('field_id',$field->id)
+        ->where('campaign_id',$campaign->id)
+        ->delete();
+
+        // if ($request->ajax()) {
+        return response(['message' => 'Se quito el campo']);
+        // }
+    }
+
+    public function addFields(Campaign $campaign, IndexCampaign $request){
+        $field_temp = Field::where('id',$request->IdField)->first();
+        if($field_temp){
+            try {
+                $campaign->fields()->attach($field_temp->id);
+                if ($request->ajax()) {
+                    return ['message' => 'Se agrego exitosamente'];
+                }
+                return redirect()->back();
+            } catch (\Throwable $th) {
+                if ($request->ajax()) {
+                    abort(409, 'El campo ingresado ya existe');
+                }
+                return redirect()->back();
+            }
+        }else{
+            if ($request->ajax()) {
+                abort(400, 'El campo ingresado no existe');
+            }
+            return redirect()->back();
+        }
     }
 
     /**

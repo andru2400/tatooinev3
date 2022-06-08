@@ -130,6 +130,12 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'CampaignsController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{campaign}',                                  'CampaignsController@update')->name('update');
             Route::delete('/{campaign}',                                'CampaignsController@destroy')->name('destroy');
+
+            Route::get('/{campaign}/fields',                            'CampaignsController@fields')->name('fields');
+            Route::post('/{campaign}/fields/add',                       'CampaignsController@addFields')->name('fields-add');
+            Route::delete('/{campaign}/fields/{field}',                 'CampaignsController@fieldDestroy')->name('fields-destroy');
+
+            Route::get('/{campaign}/fields/{field}/rules',              'CampaignsController@rules')->name('fields');
         });
     });
 });
@@ -146,8 +152,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/{role}',                                      'RolesController@update')->name('update');
             Route::delete('/{role}',                                    'RolesController@destroy')->name('destroy');
 
-            Route::post('/{role}/permissions/add',                      'RolesController@addPermissions')->name('permissions-add');
             Route::get('/{role}/permissions',                           'RolesController@permissions')->name('permissions');
+            Route::post('/{role}/permissions/add',                      'RolesController@addPermissions')->name('permissions-add');
             Route::delete('/{role}/permissions/{permission}',           'RolesController@permissionDestroy')->name('permission-destroy');
         });
     });
