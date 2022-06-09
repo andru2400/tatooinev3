@@ -22,6 +22,7 @@ Vue.component('campaign-field-listing', {
             console.log(idCampaign, idField, service)
             axios.delete(service).then(function (response) {
                 _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
+                location.reload();
             }, function (error) {
                 _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
             });
@@ -33,6 +34,7 @@ Vue.component('campaign-field-listing', {
             var self = this;
             axios.post(service,formData).then(function (response) {
                 self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Se agrego exitosamente' });
+                location.reload();
             }, function (error) {
                 self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
             });
