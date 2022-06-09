@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Campaign\StoreCampaign;
 use App\Http\Requests\Admin\Campaign\UpdateCampaign;
 use App\Models\Campaign;
 use App\Models\Campaign_field;
+use App\Models\Campaign_field_rule;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 use App\Models\Field;
+use App\Models\Rule;
 
 class CampaignsController extends Controller
 {
@@ -131,7 +133,7 @@ class CampaignsController extends Controller
         ]);
     }
 
-    public function fields(IndexCampaign $request,Campaign $campaign ){
+    public function fields(IndexCampaign $request, Campaign $campaign){
 
         // create and AdminListing instance for a specific model and
          $data = AdminListing::create(Field::class)
@@ -139,6 +141,11 @@ class CampaignsController extends Controller
          //     $query->with('roles');
          //  })
          ->get();
+
+
+        // $data->map(function($query) {
+        //     $query->activated = '';
+        // });
          // ->processRequestAndGet(
          //     // pass the request with params
          //     $request,
@@ -193,6 +200,70 @@ class CampaignsController extends Controller
             }
             return redirect()->back();
         }
+    }
+
+    public function addRules(Campaign $campaign,Field $field, IndexCampaign $request){
+
+        // $campaignfield = Campaign_field::where('campaign_id', $campaign->id)
+        //                                ->where('field_id' ,$field->id)
+        //                                ->first();
+
+        // if($campaignfield){
+        //     try {
+        //         $$campaignfield->rules()->attach($field_temp->id);
+        //         if ($request->ajax()) {
+        //             return ['message' => 'Se agrego exitosamente'];
+        //         }
+        //         return redirect()->back();
+        //     } catch (\Throwable $th) {
+        //         if ($request->ajax()) {
+        //             abort(409, 'El campo ingresado ya existe');
+        //         }
+        //         return redirect()->back();
+        //     }
+        // }else{
+        //     if ($request->ajax()) {
+        //         abort(400, 'El campo ingresado no existe');
+        //     }
+        //     return redirect()->back();
+        // }
+    }
+
+    protected function rules(IndexCampaign $request, Campaign $campaign, Field $field)
+    {
+        // create and AdminListing instance for a specific model and
+        $data = AdminListing::create(Rule::class)
+        // ->modifyQuery(function($query){
+        //     $query->with('roles');
+        //  })
+        ->get();
+        // ->processRequestAndGet(
+        //     // pass the request with params
+        //     $request,
+
+        //     // set columns to query
+        //     ['id', 'name', 'guard_name'],
+
+        //     // set columns to searchIn
+        //     ['id', 'name', 'guard_name']
+        // );
+
+        /* Busca el campaña-campo para despues preguntar si hay reglas */
+        $campaignfield = Campaign_field::where('campaign_id', $campaign->id)
+                                      ->where('field_id' ,$field->id)
+                                      ->first();
+
+        $campaignfieldrule = Campaign_field_rule::where('campaign_field_id', $campaignfield->id)
+                                                ->get();
+
+
+
+        return view('admin.campaign.rule', [
+            'data'              => $data,
+            'campaign'          => $campaign,
+            'field'             => $field,
+            'campaignfieldrule' => $campaignfieldrule
+        ]);
     }
 
     /**

@@ -4,17 +4,18 @@
 
 @section('body')
 
-<campaign-field-listing
+<campaign-field-rule-listing
     :data="{{ $data->toJson() }}"
     :campaign="{{ $campaign }}"
-    :campaignfield ="{{ $campaignfield }}"
-    :url="'{{ url('admin/campaigns/'.$campaign->id.'/fields') }}'" {{-- Arreglar --}}
+    :field="{{ $field }}"
+    :campaignfieldrule ="{{ $campaignfieldrule }}"
+    :url="'{{ url('admin/campaigns/'.$campaign->id.'/fields/'.$field->id.'/rules') }}'" {{-- Arreglar --}}
     inline-template>
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i>Campos usados en la campaña <span v-text="campaign.name"></span>
+                    <i class="fa fa-align-justify"></i>Reglas para: <span v-text="campaign.name"></span> <i class="fa fa-arrow-right" aria-hidden="true"></i> <span v-text="field.description"></span>
                 </div>
                 <div class="card-body" v-cloak>
                     <div class="card-block">
@@ -77,18 +78,15 @@
                                     {{-- <td>@{{ item.id }}</td> --}}
                                     <td>@{{ item.name }}</td>
 
-                                    <td v-if="checkExistField(item)">
+                                    <td v-if="checkExistRule(item)">
                                         <label class="switch switch-3d switch-success">
-                                            <input type="checkbox" v-model="data[index].activated" class="switch-input" checked="checked" @change="toggleSwitchPivot(item, data[index].activated)">
+                                            <input type="checkbox" v-model="data[index].activated" class="switch-input" checked="checked" @change="toggleSwitchPivotP(item, data[index].activated)">
                                             <span class="switch-slider"></span>
                                         </label>
-                                        <div class="col-auto">
-                                            <a class="btn btn-sm btn-spinner btn-primary" :href="'/admin/campaigns/'+campaign.id+'/fields/'+item.id+'/rules'" title="Asignar Reglas al campo"><i class="fa fa-wrench"></i></a>
-                                        </div>
                                     </td>
                                     <td v-else>
                                         <label class="switch switch-3d switch-success">
-                                            <input type="checkbox" v-model="data[index].activated" class="switch-input" @change="toggleSwitchPivot(item, data[index].activated)">
+                                            <input type="checkbox" v-model="data[index].activated" class="switch-input" @change="toggleSwitchPivotP(item, data[index].activated)">
                                             <span class="switch-slider"></span>
                                         </label>
                                     </td>
@@ -135,6 +133,6 @@
             </div>
         </div>
     </div>
-</campaign-field-listing>
+</campaign-field-rule-listing>
 
 @endsection

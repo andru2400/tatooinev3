@@ -54,3 +54,55 @@ Vue.component('campaign-field-listing', {
         },
     }
 });
+
+
+Vue.component('campaign-field-rule-listing', {
+    mixins: [AppListing],
+    created: function(){
+    //
+    },
+    props:['campaign','field','campaignfieldrule'],
+    data: function(){
+        return {
+            newField:''
+        }
+    },
+    methods:{
+        deleteItemById: function(idCampaign, idField) {
+            var _this7 = this;
+            var service = '/admin/campaigns/'+idCampaign+'/fields/'+idField;
+            console.log(idCampaign, idField, service)
+            axios.delete(service).then(function (response) {
+                _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
+            }, function (error) {
+                _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+            });
+        },
+        addRule: function(idObj){
+            var service = '/admin/campaigns/'+this.campaign.id+'/fields/'+this.field.id+'/rules/add';
+            var formData = new FormData();
+			formData.append("IdRule", idObj);
+            var self = this;
+            axios.post(service,formData).then(function (response) {
+                self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Se agrego exitosamente' });
+            }, function (error) {
+                self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+            });
+        },
+        checkExistRule: function(item){ /* Sirve para pintar Rules activos*/
+            let exist = this.campaignfieldrule.find(element => element.rule_id == item.id);
+            if(exist){
+                return true;
+            }else{
+                return false;
+            }
+        },
+        toggleSwitchPivotP: function(objRule, action) {
+            if(action == true){         // ADD
+                this.addRule(objRule.id);
+            }else{                      // DEL
+                this.deleteItemById(this.campaign.id , objRule.id);
+            }
+        },
+    }
+});
