@@ -70,10 +70,9 @@ Vue.component('campaign-field-rule-listing', {
         }
     },
     methods:{
-        deleteItemById: function(idCampaign, idField) {
+        deleteItemById: function(idRule) {
             var _this7 = this;
-            var service = '/admin/campaigns/'+idCampaign+'/fields/'+idField;
-            console.log(idCampaign, idField, service)
+            var service = '/admin/campaigns/'+this.campaign.id+'/fields/'+this.field.id+'/rules/'+idRule;
             axios.delete(service).then(function (response) {
                 _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
             }, function (error) {
@@ -103,7 +102,7 @@ Vue.component('campaign-field-rule-listing', {
             if(action == true){         // ADD
                 this.addRule(objRule.id);
             }else{                      // DEL
-                this.deleteItemById(this.campaign.id , objRule.id);
+                this.deleteItemById(objRule.id);
             }
         },
     }

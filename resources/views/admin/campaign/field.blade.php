@@ -51,7 +51,7 @@
 
                                     {{-- <th is='sortable' :column="'id'">{{ trans('admin.permission.columns.id') }}</th> --}}
                                     <th is='sortable' :column="'name'">{{ trans('admin.campaign.columns.name') }}</th>
-                                    <th>Estado</th>
+                                    <th is='sortable' class="d-flex justify-content-end">Estado</th>
 
                                 </tr>
                                 {{-- <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">

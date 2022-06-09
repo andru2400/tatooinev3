@@ -142,10 +142,9 @@ class CampaignsController extends Controller
          //  })
          ->get();
 
-
-        // $data->map(function($query) {
-        //     $query->activated = '';
-        // });
+         // $data->map(function($query) {
+         //     $query->activated = '';
+         // });
          // ->processRequestAndGet(
          //     // pass the request with params
          //     $request,
@@ -179,6 +178,19 @@ class CampaignsController extends Controller
         // }
     }
 
+    public function ruleDestroy(Campaign $campaign, Field $field, Rule $rule){
+        $campaignfield = Campaign_field::where('campaign_id', $campaign->id)
+                                       ->where('field_id' ,$field->id)
+                                       ->first();
+
+        $campaignfieldrule = Campaign_field_rule::where('campaign_field_id', $campaignfield->id)
+                                                ->where('rule_id', $rule->id)
+                                                ->first();
+        $campaignfieldrule->delete();
+
+        return response(['message' => 'Se elimino la regla correctamente']);
+    }
+
     public function addFields(Campaign $campaign, IndexCampaign $request){
         $field_temp = Field::where('id',$request->IdField)->first();
         if($field_temp){
@@ -203,30 +215,30 @@ class CampaignsController extends Controller
     }
 
     public function addRules(Campaign $campaign,Field $field, IndexCampaign $request){
+        $campaignfield = Campaign_field::where('campaign_id', $campaign->id)
+                                       ->where('field_id' ,$field->id)
+                                       ->first();
 
-        // $campaignfield = Campaign_field::where('campaign_id', $campaign->id)
-        //                                ->where('field_id' ,$field->id)
-        //                                ->first();
+        if($campaignfield){
+            try {
+                $campaignfield->rules()->attach($request->IdRule);
+                if ($request->ajax()) {
+                    return ['message' => 'Se agrego exitosamente'];
+                }
+                return redirect()->back();
+            } catch (\Throwable $th) {
+                if ($request->ajax()) {
+                    abort(409, 'El campo ingresado ya existe');
+                }
+                return redirect()->back();
+            }
+        }else{
+            if ($request->ajax()) {
+                abort(400, 'El campo ingresado no existe');
+            }
+            return redirect()->back();
+        }
 
-        // if($campaignfield){
-        //     try {
-        //         $$campaignfield->rules()->attach($field_temp->id);
-        //         if ($request->ajax()) {
-        //             return ['message' => 'Se agrego exitosamente'];
-        //         }
-        //         return redirect()->back();
-        //     } catch (\Throwable $th) {
-        //         if ($request->ajax()) {
-        //             abort(409, 'El campo ingresado ya existe');
-        //         }
-        //         return redirect()->back();
-        //     }
-        // }else{
-        //     if ($request->ajax()) {
-        //         abort(400, 'El campo ingresado no existe');
-        //     }
-        //     return redirect()->back();
-        // }
     }
 
     protected function rules(IndexCampaign $request, Campaign $campaign, Field $field)
