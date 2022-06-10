@@ -35,7 +35,13 @@ class FieldsController extends Controller
     public function index(IndexField $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(Field::class)->processRequestAndGet(
+        $data = AdminListing::create(Field::class)
+
+        ->modifyQuery(function($query){
+            $query->with('fieldtype');
+         })
+
+        ->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -45,6 +51,7 @@ class FieldsController extends Controller
             // set columns to searchIn
             ['id', 'name', 'description']
         );
+
 
         if ($request->ajax()) {
             if ($request->has('bulk')) {

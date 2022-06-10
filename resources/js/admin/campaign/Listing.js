@@ -25,6 +25,7 @@ Vue.component('campaign-field-listing', {
                 location.reload();
             }, function (error) {
                 _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+                location.reload();
             });
         },
         addField: function(idObj){
@@ -37,6 +38,7 @@ Vue.component('campaign-field-listing', {
                 location.reload();
             }, function (error) {
                 self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+                location.reload();
             });
         },
         checkExistField: function(item){ /* Sirve para pintar */

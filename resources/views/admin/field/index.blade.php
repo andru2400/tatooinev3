@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -51,8 +51,8 @@
 
                                         <th is='sortable' :column="'id'">{{ trans('admin.field.columns.id') }}</th>
                                         <th is='sortable' :column="'name'">{{ trans('admin.field.columns.name') }}</th>
-                                        <th is='sortable' :column="'field_type_id'">{{ trans('admin.field.columns.field_type_id') }}</th>
                                         <th is='sortable' :column="'description'">{{ trans('admin.field.columns.description') }}</th>
+                                        <th is='sortable' :column="'field_type_id'">{{ trans('admin.field.columns.field_type_id') }}</th>
 
                                         <th></th>
                                     </tr>
@@ -76,19 +76,19 @@
                                             </label>
                                         </td>
 
-                                    <td>@{{ item.id }}</td>
+                                        <td>@{{ item.id }}</td>
                                         <td>@{{ item.name }}</td>
-                                        <td>@{{ item.field_type_id }}</td>
                                         <td>@{{ item.description }}</td>
-                                        
+                                        <td>@{{ item.fieldtype.name }}</td>
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
                                                     <a class="btn btn-sm btn-spinner btn-info" :href="item.resource_url + '/edit'" title="{{ trans('brackets/admin-ui::admin.btn.edit') }}" role="button"><i class="fa fa-edit"></i></a>
                                                 </div>
-                                                <form class="col" @submit.prevent="deleteItem(item.resource_url)">
+                                                {{-- <form class="col" @submit.prevent="deleteItem(item.resource_url)">
                                                     <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('brackets/admin-ui::admin.btn.delete') }}"><i class="fa fa-trash-o"></i></button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                         </td>
                                     </tr>

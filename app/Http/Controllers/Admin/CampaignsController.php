@@ -168,13 +168,17 @@ class CampaignsController extends Controller
 
     public function fieldDestroy(Campaign $campaign,Field $field){
 
-        DB::table('campaign_field')
-        ->where('field_id',$field->id)
-        ->where('campaign_id',$campaign->id)
-        ->delete();
+        try {
+            DB::table('campaign_field')
+            ->where('field_id',$field->id)
+            ->where('campaign_id',$campaign->id)
+            ->delete();
+            return response(['message' => 'Se quito el campo']);
+        } catch (\Throwable $th) {
+            abort(409, 'Elimine primero las reglas del campo');
+        }
 
         // if ($request->ajax()) {
-        return response(['message' => 'Se quito el campo']);
         // }
     }
 
@@ -192,6 +196,16 @@ class CampaignsController extends Controller
     }
 
     public function addFields(Campaign $campaign, IndexCampaign $request){
+
+        /* Pregunta si ya hay un registro */
+        $campaignfield = Campaign_field::where('campaign_id',$campaign->id)
+                                       ->where('field_id',$request->IdField)
+                                       ->first();
+
+        if($campaignfield){
+            abort(409, 'Ya existe el campo en la campaña, refresque la pagina');
+        }
+
         $field_temp = Field::where('id',$request->IdField)->first();
         if($field_temp){
             try {
@@ -318,13 +332,20 @@ class CampaignsController extends Controller
      */
     public function destroy(DestroyCampaign $request, Campaign $campaign)
     {
-        $campaign->delete();
 
-        if ($request->ajax()) {
-            return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+        try {
+            $campaign->delete();
+
+            if ($request->ajax()) {
+                return response(['message' => trans('brackets/admin-ui::admin.operation.succeeded')]);
+            }
+
+            return redirect()->back();
+
+        } catch (\Throwable $th) {
+            abort(409, 'La campaña tiene campos asignados, eliminelos he intente nuevamente');
         }
 
-        return redirect()->back();
     }
 
     /**
