@@ -15,7 +15,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i>  <span v-text="campaign.name"></span>  <i class="fa fa-arrow-right" aria-hidden="true"></i>  <span v-text="field.description"></span>  <i class="fa fa-arrow-right" aria-hidden="true"></i> Agregar Reglas
+                    <i class="fa fa-align-justify"></i>  <span v-text="campaign.name"></span>  <i class="fa fa-arrow-right" aria-hidden="true"></i>  <span v-text="field.name"></span>  <i class="fa fa-arrow-right" aria-hidden="true"></i> Agregar Reglas
                     <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" :href="'/admin/campaigns/'+campaign.id+'/fields'" role="button"><i class="fa fa-angle-double-left"></i>&nbsp; volver</a>
                 </div>
                 <div class="card-body" v-cloak>
