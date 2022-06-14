@@ -24,6 +24,7 @@ use Illuminate\View\View;
 class OptionsController extends Controller
 {
 
+    public $id_type_field_select = 7;
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +66,7 @@ class OptionsController extends Controller
     public function create()
     {
         $this->authorize('admin.option.create');
-        $fields = Field::get();
+        $fields = Field::where('field_type_id', $this->id_type_field_select)->get();
 
         return view('admin.option.create', ['fields' => $fields]);
     }
@@ -121,7 +122,7 @@ class OptionsController extends Controller
     {
         $this->authorize('admin.option.edit', $option);
         $option->load('fields');
-        $fields = Field::get();
+        $fields = Field::where('field_type_id', $this->id_type_field_select)->get();
 
         return view('admin.option.edit', [
             'option' => $option,

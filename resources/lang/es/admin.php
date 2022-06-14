@@ -62,7 +62,7 @@ return [
             'id' => 'ID',
             'name' => 'Nombre',
             'value' => 'Valor',
-
+            'fields' => 'Campos',
         ],
     ],
 
