@@ -44,7 +44,7 @@
     <label for="options" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.field.columns.options') }}</label>
     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
         {{-- <multiselect v-model="form.options" disabled placeholder="{{ trans('brackets/admin-ui::admin.forms.select_options') }}" label="name" track-by="id" :options="{{ $options->toJson() }}" :multiple="true" open-direction="bottom"></multiselect> --}}
-        <div v-if="errors.has('options')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('options') }}</div>
+        <div v-if="form.options.length == 0" class="form-control-feedback form-text">No hay opciones seleccionadas</div>
         <div v-for="option in form.options">
            <label> @{{ option.name }}</label>
         </div>
