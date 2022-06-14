@@ -120,18 +120,19 @@ return [
     ],
 
     'campaign' => [
-        'title' => 'Campaigns',
+        'title' => 'Campañas',
 
         'actions' => [
-            'index' => 'Campaigns',
-            'create' => 'New Campaign',
-            'edit' => 'Edit :name',
+            'index' => 'Campañas',
+            'create' => 'Nueva campaña',
+            'edit' => 'Editar :name',
         ],
 
         'columns' => [
             'id' => 'ID',
-            'name' => 'Name',
-            'status' => 'Status',
+            'name' => 'Nombre',
+            'status' => 'Estado',
+            'fields' => 'Campos',
 
         ],
     ],
@@ -154,18 +155,18 @@ return [
     ],
 
     'permission' => [
-        'title' => 'Permissions',
+        'title' => 'Permisos',
 
         'actions' => [
-            'index' => 'Permissions',
-            'create' => 'New Permission',
-            'edit' => 'Edit :name',
+            'index' => 'Permisos',
+            'create' => 'Nuevo permiso',
+            'edit' => 'Editar :name',
         ],
 
         'columns' => [
             'id' => 'ID',
-            'name' => 'Name',
-            'guard_name' => 'Guard name',
+            'name' => 'Nombre',
+            'guard_name' => 'Nombre de guardia',
 
         ],
     ],
