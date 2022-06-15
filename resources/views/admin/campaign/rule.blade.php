@@ -52,8 +52,8 @@
                                     </th> --}}
 
                                     {{-- <th is='sortable' :column="'id'">{{ trans('admin.permission.columns.id') }}</th> --}}
-                                    <th is='sortable' :column="'name'">{{ trans('admin.campaign.columns.name') }}</th>
-                                    <th is='sortable' class="d-flex justify-content-end">Estado</th>
+                                    <th>{{ trans('admin.campaign.columns.name') }}</th>
+                                    <th class="d-flex justify-content-end">Estado</th>
 
                                 </tr>
                                 {{-- <tr v-show="(clickedBulkItemsCount > 0) || isClickedAll">
@@ -69,7 +69,7 @@
                                 </tr> --}}
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in data" :key="item.id" :class="bulkItems[item.id] ? 'bg-bulk' : ''">
+                                <tr v-for="(item, index) in data" :key="item.id">
                                     {{-- <td class="bulk-checkbox">
                                         <input class="form-check-input" :id="'enabled' + item.id" type="checkbox" v-model="bulkItems[item.id]" v-validate="''" :data-vv-name="'enabled' + item.id"  :name="'enabled' + item.id + '_fake_element'" @click="onBulkItemClicked(item.id)" :disabled="bulkCheckingAllLoader">
                                         <label class="form-check-label" :for="'enabled' + item.id">

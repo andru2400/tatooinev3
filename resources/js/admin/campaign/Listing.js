@@ -95,11 +95,10 @@ Vue.component('campaign-field-listing', {
 
 
 Vue.component('campaign-field-rule-listing', {
-    mixins: [AppListing],
     created: function(){
     //
     },
-    props:['campaign','field','campaignfieldrule'],
+    props:['campaign','field','campaignfieldrule','data'],
     data: function(){
         return {
             newField:''

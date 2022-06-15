@@ -12,7 +12,7 @@
 
     <div>
 
-        <div class="card-header">
+        <div class="card-header my-2">
             <i class="fa fa-align-justify"></i>  <span v-text="campaign.name"></span>  <i class="fa fa-arrow-right" aria-hidden="true"></i> Agregar Campos
             <a class="btn btn-primary btn-spinner btn-sm pull-right m-b-0" :href="'/admin/campaigns/'" role="button"><i class="fa fa-angle-double-left"></i>&nbsp; volver</a>
         </div>
