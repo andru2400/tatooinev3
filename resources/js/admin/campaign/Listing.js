@@ -5,14 +5,46 @@ Vue.component('campaign-listing', {
 });
 
 Vue.component('campaign-field-listing', {
-    mixins: [AppListing],
     created: function(){
     //
     },
     props:['campaign','campaignfield'],
     data: function(){
         return {
-            newField:''
+            newField:'',
+            columns: [
+                {
+                  label: "Nombre",
+                  name: "name",
+                  sort: true
+                },
+                // {
+                //   label: "Tipo campo",
+                //   name: "fieldtype.name",
+                //   sort: false
+                // },
+                {
+                  label: "Descripción",
+                  name: "description",
+                  sort: true
+                },
+                {
+                  label: "Estado",
+                  name: "activated",
+                  sort: false
+                }
+              ],
+              config: {
+                card_mode:  false,
+                checkbox_rows: false,
+                rows_selectable: false,
+                show_refresh_button: false,
+                show_reset_button: false,
+                global_search: {
+                    placeholder: 'Buscar..'
+                },
+                per_page: 50,
+              }
         }
     },
     methods:{
@@ -42,6 +74,7 @@ Vue.component('campaign-field-listing', {
             });
         },
         checkExistField: function(item){ /* Sirve para pintar */
+            console.log(item);
             let exist = this.campaignfield.find(element => element.field_id == item.id);
             if(exist){
                 return true;
@@ -50,6 +83,7 @@ Vue.component('campaign-field-listing', {
             }
         },
         toggleSwitchPivot: function(objField, action) {
+            console.log(objField, action);
             if(action == true){         // ADD
                 this.addField(objField.id);
             }else{                      // DEL

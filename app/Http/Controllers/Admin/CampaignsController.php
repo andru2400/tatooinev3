@@ -136,15 +136,18 @@ class CampaignsController extends Controller
     public function fields(IndexCampaign $request, Campaign $campaign){
 
         // create and AdminListing instance for a specific model and
-         $data = AdminListing::create(Field::class)
+        //  $data = AdminListing::create(Field::class)
          // ->modifyQuery(function($query){
          //     $query->with('roles');
          //  })
-         ->get();
+        //  ->get();
 
-         // $data->map(function($query) {
-         //     $query->activated = '';
-         // });
+        $data = Field::with('fieldtype')->get();
+
+        // $data->map(function($query) {
+        //     $query->activated = false;
+        // });
+
          // ->processRequestAndGet(
          //     // pass the request with params
          //     $request,
