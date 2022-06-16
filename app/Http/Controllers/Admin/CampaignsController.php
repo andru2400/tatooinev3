@@ -258,6 +258,26 @@ class CampaignsController extends Controller
 
     }
 
+    public function addValueRule(IndexCampaign $request){
+        $campaignfield = Campaign_field::where('campaign_id', $request->campaigns)
+        ->where('field_id' , $request->field)
+        ->first('id');
+
+        if($campaignfield){
+            $campaignfieldrule = Campaign_field_rule::where('campaign_field_id', $campaignfield->id)
+                                                ->where('rule_id', $request->rule)
+                                                ->first();
+            $campaignfieldrule->value = $request->value_rule;
+            $response = $campaignfieldrule->save();
+
+            if($response){
+                return ['message' => 'Se agrego exitosamente'];
+            }
+        }
+
+    }
+
+
     protected function rules(IndexCampaign $request, Campaign $campaign, Field $field)
     {
         // create and AdminListing instance for a specific model and

@@ -89,7 +89,7 @@
                                             <span class="switch-slider"></span>
                                         </label>
                                         <div class="col-auto">
-                                            <a class="btn btn-sm btn-primary" title="Asignar Reglas al campo" @click="show()"><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-sm btn-primary" title="Asignar Reglas al campo" @click="show(data[index].id,valuePivot(item))"><i class="fa fa-edit"></i></a>
                                         </div>
                                     </td>
                                     <td v-else>
@@ -141,31 +141,33 @@
             </div>
         </div>
 
-    <modal name="hello-world">
+        <!-- Button trigger modal -->
+        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+            Launch demo modal
+        </button> --}}
 
-
-              <div class="modal-content">
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Valor de la regla</h5>
-                  <button type="button" class="close" data-dismiss="modal" v-on:click="close()">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                  </button>
+                </button>
                 </div>
                 <div class="modal-body">
-                  <form>
-                    <div class="form-group">
-                      {{-- <label for="recipient-name" class="col-form-label">Recipient:</label> --}}
-                      <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                  </form>
+                    <input type="text" class="form-control" id="recipient-name" v-model="value_rule">
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Guardar valor</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" @click="saveValueRule(campaign.id,field.id,rule)">Guardar valor</button>
                 </div>
-              </div>
+            </div>
+            </div>
+        </div>
 
 
-    </modal>
     </div>
 </campaign-field-rule-listing>
 

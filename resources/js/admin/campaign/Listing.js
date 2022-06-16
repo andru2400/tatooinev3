@@ -99,7 +99,9 @@ Vue.component('campaign-field-rule-listing', {
     props:['campaign','field','campaignfieldrule','data'],
     data: function(){
         return {
-            newField:''
+            newField:'',
+            value_rule:"",
+            rule:""
         }
     },
     methods:{
@@ -108,10 +110,10 @@ Vue.component('campaign-field-rule-listing', {
             var service = '/admin/campaigns/'+this.campaign.id+'/fields/'+this.field.id+'/rules/'+idRule;
             axios.delete(service).then(function (response) {
                 _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
-                location.reload();
+                // location.reload();
             }, function (error) {
                 _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
-                location.reload();
+                // location.reload();
             });
         },
         addRule: function(idObj){
@@ -121,10 +123,10 @@ Vue.component('campaign-field-rule-listing', {
             var self = this;
             axios.post(service,formData).then(function (response) {
                 self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Se agrego exitosamente' });
-                location.reload();
+                // location.reload();
             }, function (error) {
                 self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
-                location.reload();
+                // location.reload();
             });
         },
         checkExistRule: function(item){ /* Sirve para pintar Rules activos*/
@@ -153,14 +155,37 @@ Vue.component('campaign-field-rule-listing', {
                 this.deleteItemById(objRule.id);
             }
         },
-        show: function() {
-            this.$modal.show('hello-world');
+        show(x,y) {
+            this.rule=x;
+            this.value_rule=y;
+            $("#exampleModalLong").modal('show');
         },
-        hide: function() {
-            this.$modal.hide('hello-world');
+        hide() {
+            $("#exampleModalLong").modal('hide');
         },
-        close: function(){
-            this.$modal.hide('hello-world');
+        close(){
+            $("#exampleModalLong").modal('hide');
+        },
+        saveValueRule(campaign,field){
+            var service = '/admin/campaigns/fields/rules/addValueRule';
+            var formData = new FormData();
+			formData.append("campaigns", campaign);
+			formData.append("field", field);
+			formData.append("rule", this.rule);
+			formData.append("value_rule", this.value_rule);
+            var self = this;
+            axios.post(service,formData).then(function (response) {
+                self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Se agrego exitosamente' });
+                self.value_rule = '';
+                self.close();
+                location.reload();
+            }, function (error) {
+                self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+                // location.reload();
+                this.value_rule = '';
+            });
+
+
         }
     }
 });

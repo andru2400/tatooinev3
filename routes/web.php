@@ -137,6 +137,8 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
 
             Route::get('/{campaign}/fields/{field}/rules',              'CampaignsController@rules')->name('campaignfield-rule');
             Route::post('/{campaign}/fields/{field}/rules/add',         'CampaignsController@addRules')->name('campaignfield-rule-add');
+            Route::post('/fields/rules/addValueRule',          'CampaignsController@addValueRule')->name('campaignfield-value-rule-add');
+
             Route::delete('/{campaign}/fields/{field}/rules/{rule}',    'CampaignsController@ruleDestroy')->name('rule-destroy');
         });
     });
