@@ -53,6 +53,7 @@
 
                                     {{-- <th is='sortable' :column="'id'">{{ trans('admin.permission.columns.id') }}</th> --}}
                                     <th>{{ trans('admin.campaign.columns.name') }}</th>
+                                    <th>Valor</th>
                                     <th class="d-flex justify-content-end">Estado</th>
 
                                 </tr>
@@ -79,11 +80,17 @@
                                     {{-- <td>@{{ item.id }}</td> --}}
                                     <td>@{{ item.name }}</td>
 
+                                    <td>@{{ valuePivot(item) }}</td>
+
+
                                     <td v-if="checkExistRule(item)">
                                         <label class="switch switch-3d switch-success">
                                             <input type="checkbox" v-model="data[index].activated" class="switch-input" checked="checked" @change="toggleSwitchPivotP(item, data[index].activated)">
                                             <span class="switch-slider"></span>
                                         </label>
+                                        <div class="col-auto">
+                                            <a class="btn btn-sm btn-primary" title="Asignar Reglas al campo" @click="show()"><i class="fa fa-edit"></i></a>
+                                        </div>
                                     </td>
                                     <td v-else>
                                         <label class="switch switch-3d switch-success">
@@ -133,6 +140,32 @@
                 </div>
             </div>
         </div>
+
+    <modal name="hello-world">
+
+
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Valor de la regla</h5>
+                  <button type="button" class="close" data-dismiss="modal" v-on:click="close()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      {{-- <label for="recipient-name" class="col-form-label">Recipient:</label> --}}
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Guardar valor</button>
+                </div>
+              </div>
+
+
+    </modal>
     </div>
 </campaign-field-rule-listing>
 

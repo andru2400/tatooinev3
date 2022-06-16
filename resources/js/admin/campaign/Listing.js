@@ -74,7 +74,6 @@ Vue.component('campaign-field-listing', {
             });
         },
         checkExistField: function(item){ /* Sirve para pintar */
-            console.log(item);
             let exist = this.campaignfield.find(element => element.field_id == item.id);
             if(exist){
                 return true;
@@ -83,7 +82,6 @@ Vue.component('campaign-field-listing', {
             }
         },
         toggleSwitchPivot: function(objField, action) {
-            console.log(objField, action);
             if(action == true){         // ADD
                 this.addField(objField.id);
             }else{                      // DEL
@@ -110,8 +108,10 @@ Vue.component('campaign-field-rule-listing', {
             var service = '/admin/campaigns/'+this.campaign.id+'/fields/'+this.field.id+'/rules/'+idRule;
             axios.delete(service).then(function (response) {
                 _this7.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Item successfully deleted.' });
+                location.reload();
             }, function (error) {
                 _this7.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+                location.reload();
             });
         },
         addRule: function(idObj){
@@ -121,8 +121,10 @@ Vue.component('campaign-field-rule-listing', {
             var self = this;
             axios.post(service,formData).then(function (response) {
                 self.$notify({ type: 'success', title: 'Success!', text: response.data.message ? response.data.message : 'Se agrego exitosamente' });
+                location.reload();
             }, function (error) {
                 self.$notify({ type: 'error', title: 'Error!', text: error.response.data.message ? error.response.data.message : 'An error has occured.' });
+                location.reload();
             });
         },
         checkExistRule: function(item){ /* Sirve para pintar Rules activos*/
@@ -133,6 +135,17 @@ Vue.component('campaign-field-rule-listing', {
                 return false;
             }
         },
+        valuePivot: function(item){ /* Sirve para pintar Rules activos*/
+            let exist = this.campaignfieldrule.find(element => element.rule_id == item.id);
+            if(exist){
+                if(exist.value == null){
+                    return "No hay valor en la regla";
+                }
+                return exist.value;
+            }else{
+                return "-";
+            }
+        },
         toggleSwitchPivotP: function(objRule, action) {
             if(action == true){         // ADD
                 this.addRule(objRule.id);
@@ -140,5 +153,14 @@ Vue.component('campaign-field-rule-listing', {
                 this.deleteItemById(objRule.id);
             }
         },
+        show: function() {
+            this.$modal.show('hello-world');
+        },
+        hide: function() {
+            this.$modal.hide('hello-world');
+        },
+        close: function(){
+            this.$modal.hide('hello-world');
+        }
     }
 });
