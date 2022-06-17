@@ -169,5 +169,91 @@ return [
         ],
     ],
 
+    'campaign-owner' => [
+        'title' => 'Campaign Owners',
+
+        'actions' => [
+            'index' => 'Campaign Owners',
+            'create' => 'New Campaign Owner',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'status' => 'Status',
+            
+        ],
+    ],
+
+    'country' => [
+        'title' => 'Countries',
+
+        'actions' => [
+            'index' => 'Countries',
+            'create' => 'New Country',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            
+        ],
+    ],
+
+    'departament' => [
+        'title' => 'Departaments',
+
+        'actions' => [
+            'index' => 'Departaments',
+            'create' => 'New Departament',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'country_id' => 'Country',
+            
+        ],
+    ],
+
+    'city' => [
+        'title' => 'Cities',
+
+        'actions' => [
+            'index' => 'Cities',
+            'create' => 'New City',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'departament_id' => 'Departament',
+            
+        ],
+    ],
+
+    'owner-location' => [
+        'title' => 'Owner Locations',
+
+        'actions' => [
+            'index' => 'Owner Locations',
+            'create' => 'New Owner Location',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'campaign_owner_id' => 'Campaign owner',
+            'city_id' => 'City',
+            'status' => 'Status',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

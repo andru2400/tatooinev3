@@ -171,5 +171,91 @@ return [
         ],
     ],
 
+    'campaign-owner' => [
+        'title' => 'Propietarios',
+
+        'actions' => [
+            'index' => 'Propietarios',
+            'create' => 'Nuevo propietario',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'status' => 'Estado',
+
+        ],
+    ],
+
+    'country' => [
+        'title' => 'Países',
+
+        'actions' => [
+            'index' => 'Países',
+            'create' => 'Nuevo País',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+
+        ],
+    ],
+
+    'departament' => [
+        'title' => 'Departamentos',
+
+        'actions' => [
+            'index' => 'Departamentos',
+            'create' => 'Nuevo departamento',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'country_id' => 'País',
+
+        ],
+    ],
+
+    'city' => [
+        'title' => 'Ciudades',
+
+        'actions' => [
+            'index' => 'Ciudades',
+            'create' => 'Nueva ciudad',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'departament_id' => 'Departamento',
+
+        ],
+    ],
+
+    'owner-location' => [
+        'title' => 'Ubicaciones',
+
+        'actions' => [
+            'index' => 'Ubicaciones ',
+            'create' => 'Nueva ubicación',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'campaign_owner_id' => 'Propietario',
+            'city_id' => 'Ciudad',
+            'status' => 'Estado',
+
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

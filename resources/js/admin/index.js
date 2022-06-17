@@ -9,3 +9,8 @@ import './field-type';
 import './campaign';
 import './role';
 import './permission';
+import './campaign-owner';
+import './country';
+import './departament';
+import './city';
+import './owner-location';

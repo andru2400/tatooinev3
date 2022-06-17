@@ -177,3 +177,79 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('campaign-owners')->name('campaign-owners/')->group(static function() {
+            Route::get('/',                                             'CampaignOwnersController@index')->name('index');
+            Route::get('/create',                                       'CampaignOwnersController@create')->name('create');
+            Route::post('/',                                            'CampaignOwnersController@store')->name('store');
+            Route::get('/{campaignOwner}/edit',                         'CampaignOwnersController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CampaignOwnersController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{campaignOwner}',                             'CampaignOwnersController@update')->name('update');
+            Route::delete('/{campaignOwner}',                           'CampaignOwnersController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('countries')->name('countries/')->group(static function() {
+            Route::get('/',                                             'CountriesController@index')->name('index');
+            Route::get('/create',                                       'CountriesController@create')->name('create');
+            Route::post('/',                                            'CountriesController@store')->name('store');
+            Route::get('/{country}/edit',                               'CountriesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CountriesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{country}',                                   'CountriesController@update')->name('update');
+            Route::delete('/{country}',                                 'CountriesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('departaments')->name('departaments/')->group(static function() {
+            Route::get('/',                                             'DepartamentsController@index')->name('index');
+            Route::get('/create',                                       'DepartamentsController@create')->name('create');
+            Route::post('/',                                            'DepartamentsController@store')->name('store');
+            Route::get('/{departament}/edit',                           'DepartamentsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'DepartamentsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{departament}',                               'DepartamentsController@update')->name('update');
+            Route::delete('/{departament}',                             'DepartamentsController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('cities')->name('cities/')->group(static function() {
+            Route::get('/',                                             'CitiesController@index')->name('index');
+            Route::get('/create',                                       'CitiesController@create')->name('create');
+            Route::post('/',                                            'CitiesController@store')->name('store');
+            Route::get('/{city}/edit',                                  'CitiesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CitiesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{city}',                                      'CitiesController@update')->name('update');
+            Route::delete('/{city}',                                    'CitiesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('owner-locations')->name('owner-locations/')->group(static function() {
+            Route::get('/',                                             'OwnerLocationsController@index')->name('index');
+            Route::get('/create',                                       'OwnerLocationsController@create')->name('create');
+            Route::post('/',                                            'OwnerLocationsController@store')->name('store');
+            Route::get('/{ownerLocation}/edit',                         'OwnerLocationsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'OwnerLocationsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{ownerLocation}',                             'OwnerLocationsController@update')->name('update');
+            Route::delete('/{ownerLocation}',                           'OwnerLocationsController@destroy')->name('destroy');
+        });
+    });
+});

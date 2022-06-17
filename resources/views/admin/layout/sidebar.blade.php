@@ -10,6 +10,11 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/campaigns') }}"><i class="nav-icon icon-magnet"></i> {{ trans('admin.campaign.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/roles') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.role.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/permissions') }}"><i class="nav-icon icon-graduation"></i> {{ trans('admin.permission.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/campaign-owners') }}"><i class="nav-icon icon-book-open"></i> {{ trans('admin.campaign-owner.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/countries') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.country.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/departaments') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.departament.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/cities') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.city.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/owner-locations') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.owner-location.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
