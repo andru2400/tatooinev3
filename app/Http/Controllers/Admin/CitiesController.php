@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\City\IndexCity;
 use App\Http\Requests\Admin\City\StoreCity;
 use App\Http\Requests\Admin\City\UpdateCity;
 use App\Models\City;
+use App\Models\Departament;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -32,7 +33,11 @@ class CitiesController extends Controller
     public function index(IndexCity $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(City::class)->processRequestAndGet(
+        $data = AdminListing::create(City::class)
+        ->modifyQuery(function($query){
+            $query->with('departament');
+         })
+        ->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -64,8 +69,9 @@ class CitiesController extends Controller
     public function create()
     {
         $this->authorize('admin.city.create');
+        $departaments = Departament::get();
 
-        return view('admin.city.create');
+        return view('admin.city.create',['departaments' => $departaments]);
     }
 
     /**
@@ -113,10 +119,13 @@ class CitiesController extends Controller
     public function edit(City $city)
     {
         $this->authorize('admin.city.edit', $city);
+        $city->departament_id = (string)$city->departament_id;
+        $departaments = Departament::get();
 
 
         return view('admin.city.edit', [
             'city' => $city,
+            'departaments' => $departaments,
         ]);
     }
 

@@ -25,6 +25,12 @@ class Departament extends Model
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    /* 1:m */
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */

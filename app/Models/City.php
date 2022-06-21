@@ -19,6 +19,12 @@ class City extends Model
 
     ];
 
+    /* m:1 */
+    public function departament()
+    {
+        return $this->belongsTo(Departament::class,'departament_id');
+    }
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
