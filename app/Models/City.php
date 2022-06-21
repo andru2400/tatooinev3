@@ -9,16 +9,16 @@ class City extends Model
     protected $fillable = [
         'name',
         'departament_id',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */

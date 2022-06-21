@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Departament\DestroyDepartament;
 use App\Http\Requests\Admin\Departament\IndexDepartament;
 use App\Http\Requests\Admin\Departament\StoreDepartament;
 use App\Http\Requests\Admin\Departament\UpdateDepartament;
+use App\Models\Country;
 use App\Models\Departament;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -32,7 +33,11 @@ class DepartamentsController extends Controller
     public function index(IndexDepartament $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(Departament::class)->processRequestAndGet(
+        $data = AdminListing::create(Departament::class)
+        ->modifyQuery(function($query){
+            $query->with('country');
+         })
+        ->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -64,8 +69,9 @@ class DepartamentsController extends Controller
     public function create()
     {
         $this->authorize('admin.departament.create');
+        $country = Country::get();
 
-        return view('admin.departament.create');
+        return view('admin.departament.create', ['country' => $country]);
     }
 
     /**
@@ -113,10 +119,12 @@ class DepartamentsController extends Controller
     public function edit(Departament $departament)
     {
         $this->authorize('admin.departament.edit', $departament);
-
+        $departament->country_id = (string)$departament->country_id;
+        $country = Country::get();
 
         return view('admin.departament.edit', [
             'departament' => $departament,
+            'country' => $country,
         ]);
     }
 
