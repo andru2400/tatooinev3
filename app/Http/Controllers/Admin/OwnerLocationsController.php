@@ -8,6 +8,8 @@ use App\Http\Requests\Admin\OwnerLocation\DestroyOwnerLocation;
 use App\Http\Requests\Admin\OwnerLocation\IndexOwnerLocation;
 use App\Http\Requests\Admin\OwnerLocation\StoreOwnerLocation;
 use App\Http\Requests\Admin\OwnerLocation\UpdateOwnerLocation;
+use App\Models\CampaignOwner;
+use App\Models\City;
 use App\Models\OwnerLocation;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -32,7 +34,11 @@ class OwnerLocationsController extends Controller
     public function index(IndexOwnerLocation $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(OwnerLocation::class)->processRequestAndGet(
+        $data = AdminListing::create(OwnerLocation::class)
+        ->modifyQuery(function($query){
+            $query->with(['city','campaign_owner']);
+         })
+        ->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -64,8 +70,12 @@ class OwnerLocationsController extends Controller
     public function create()
     {
         $this->authorize('admin.owner-location.create');
+        $campaign_owners = CampaignOwner::get();
+        $cities = City::get();
 
-        return view('admin.owner-location.create');
+        return view('admin.owner-location.create',
+                                ['campaign_owners' => $campaign_owners,
+                                 'cities' => $cities ]);
     }
 
     /**
@@ -114,9 +124,16 @@ class OwnerLocationsController extends Controller
     {
         $this->authorize('admin.owner-location.edit', $ownerLocation);
 
+        $ownerLocation->campaign_owner_id = (string)$ownerLocation->campaign_owner_id;
+        $ownerLocation->city_id           = (string)$ownerLocation->city_id;
+
+        $campaign_owners = CampaignOwner::get();
+        $cities = City::get();
 
         return view('admin.owner-location.edit', [
             'ownerLocation' => $ownerLocation,
+            'campaign_owners' => $campaign_owners,
+            'cities' => $cities
         ]);
     }
 

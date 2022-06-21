@@ -11,16 +11,28 @@ class OwnerLocation extends Model
         'campaign_owner_id',
         'city_id',
         'status',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
+    /* m:1 */
+    public function campaign_owner()
+    {
+        return $this->belongsTo(CampaignOwner::class, 'campaign_owner_id');
+    }
+
+    /* m:1 */
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */

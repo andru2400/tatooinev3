@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -79,10 +79,12 @@
 
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.name }}</td>
-                                        <td>@{{ item.campaign_owner_id }}</td>
-                                        <td>@{{ item.city_id }}</td>
-                                        <td>@{{ item.status }}</td>
-                                        
+                                        <td>@{{ item.campaign_owner.name }}</td>
+                                        <td>@{{ item.city.name }}</td>
+                                        <td>
+                                            <span class="badge" :class="item.status == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                        </td>
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
