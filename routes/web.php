@@ -253,3 +253,33 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('user-attributes')->name('user-attributes/')->group(static function() {
+            Route::get('/',                                             'UserAttributesController@index')->name('index');
+            Route::get('/create',                                       'UserAttributesController@create')->name('create');
+            Route::post('/',                                            'UserAttributesController@store')->name('store');
+            Route::get('/{userAttribute}/edit',                         'UserAttributesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'UserAttributesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{userAttribute}',                             'UserAttributesController@update')->name('update');
+            Route::delete('/{userAttribute}',                           'UserAttributesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('user-attribute-options')->name('user-attribute-options/')->group(static function() {
+            Route::get('/',                                             'UserAttributeOptionsController@index')->name('index');
+            Route::get('/create',                                       'UserAttributeOptionsController@create')->name('create');
+            Route::post('/',                                            'UserAttributeOptionsController@store')->name('store');
+            Route::get('/{userAttributeOption}/edit',                   'UserAttributeOptionsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'UserAttributeOptionsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{userAttributeOption}',                       'UserAttributeOptionsController@update')->name('update');
+            Route::delete('/{userAttributeOption}',                     'UserAttributeOptionsController@destroy')->name('destroy');
+        });
+    });
+});

@@ -259,5 +259,43 @@ return [
         ],
     ],
 
+    'user-attribute' => [
+        'title' => 'Atributos de usuario',
+
+        'actions' => [
+            'index' => 'Atributos de usuario',
+            'create' => 'Nuevo atributo de usuario',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'description' => 'Descripción',
+            'islist' => '¿Es Lista?',
+            'unique' => '¿Es Unico?',
+            'required' => '¿Es Requerido?',
+            'status' => 'Estado',
+
+        ],
+    ],
+
+    'user-attribute-option' => [
+        'title' => 'Opciones de atributo de usuario',
+
+        'actions' => [
+            'index' => 'Opciones de atributo de usuario',
+            'create' => 'Nueva opción de atributo de usuario',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'value' => 'Valor',
+            'user_attribute_id' => 'Atributo de usuario',
+
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

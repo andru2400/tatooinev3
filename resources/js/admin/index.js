@@ -14,3 +14,5 @@ import './country';
 import './departament';
 import './city';
 import './owner-location';
+import './user-attribute';
+import './user-attribute-option';

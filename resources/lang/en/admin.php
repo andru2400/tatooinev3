@@ -255,5 +255,43 @@ return [
         ],
     ],
 
+    'user-attribute' => [
+        'title' => 'User Attributes',
+
+        'actions' => [
+            'index' => 'User Attributes',
+            'create' => 'New User Attribute',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'description' => 'Description',
+            'islist' => 'Islist',
+            'unique' => 'Unique',
+            'required' => 'Required',
+            'status' => 'Status',
+            
+        ],
+    ],
+
+    'user-attribute-option' => [
+        'title' => 'User Attribute Options',
+
+        'actions' => [
+            'index' => 'User Attribute Options',
+            'create' => 'New User Attribute Option',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'value' => 'Value',
+            'user_attribute_id' => 'User attribute',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

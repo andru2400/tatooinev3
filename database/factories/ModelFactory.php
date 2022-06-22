@@ -165,3 +165,29 @@ $factory->define(App\Models\OwnerLocation::class, static function (Faker\Generat
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\UserAttribute::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'description' => $faker->sentence,
+        'islist' => $faker->boolean(),
+        'unique' => $faker->boolean(),
+        'required' => $faker->boolean(),
+        'status' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\UserAttributeOption::class, static function (Faker\Generator $faker) {
+    return [
+        'value' => $faker->sentence,
+        'user_attribute_id' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

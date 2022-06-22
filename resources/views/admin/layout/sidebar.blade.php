@@ -15,6 +15,8 @@
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/departaments') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.departament.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/cities') }}"><i class="nav-icon icon-diamond"></i> {{ trans('admin.city.title') }}</a></li>
            <li class="nav-item"><a class="nav-link" href="{{ url('admin/owner-locations') }}"><i class="nav-icon icon-globe"></i> {{ trans('admin.owner-location.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/user-attributes') }}"><i class="nav-icon icon-book-open"></i> {{ trans('admin.user-attribute.title') }}</a></li>
+           <li class="nav-item"><a class="nav-link" href="{{ url('admin/user-attribute-options') }}"><i class="nav-icon icon-book-open"></i> {{ trans('admin.user-attribute-option.title') }}</a></li>
            {{-- Do not delete me :) I'm used for auto-generation menu items --}}
 
             <li class="nav-title">{{ trans('brackets/admin-ui::admin.sidebar.settings') }}</li>
