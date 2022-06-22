@@ -19,6 +19,8 @@ class CreateCampaignOwnerLocationTable extends Migration
             $table->bigInteger('campaign_id')->unsigned();
             $table->bigInteger('owner_location_id')->unsigned();
 
+            $table->boolean('status');
+
             $table->foreign('campaign_id')->references('id')->on('campaigns');
             $table->foreign('owner_location_id')->references('id')->on('owner_locations');
             $table->timestamps();
