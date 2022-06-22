@@ -21,6 +21,12 @@ class OwnerLocation extends Model
 
     ];
 
+    /* m:m */
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
+
     /* m:1 */
     public function campaign_owner()
     {

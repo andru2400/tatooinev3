@@ -45,6 +45,8 @@ return [
             'email' => 'Correo',
             'email_verified_at' => 'Correo verificado en',
             'password' => 'Contraseña',
+            'password_repeat' => 'Repite Contraseña',
+            'owner_locations' => 'Propietario/ubicación',
 
         ],
     ],

@@ -43,6 +43,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /* m:m */
+    public function owner_locations()
+    {
+        return $this->belongsToMany('App\Models\OwnerLocation');
+    }
+
     /*ADD DETAIL CRAFTABLE*/
     protected $appends = ['resource_url'];
 

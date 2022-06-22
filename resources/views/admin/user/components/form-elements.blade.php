@@ -41,4 +41,11 @@
     </div>
 </div>
 
-
+{{-- ok --}}
+<div class="form-group row align-items-center" :class="{'has-danger': errors.has('owner_locations'), 'has-success': fields.owner_locations && fields.owner_locations.valid }">
+    <label for="owner_locations" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ trans('admin.user.columns.owner_locations') }}</label>
+    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+        <multiselect v-model="form.owner_locations" placeholder="Seleccione el propietario - ciudad - ubicación" label="name" track-by="id" :options="{{ $owner_locations->toJson() }}" :multiple="true" open-direction="bottom"></multiselect>
+        <div v-if="errors.has('owner_locations')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('owner_locations') }}</div>
+    </div>
+</div>

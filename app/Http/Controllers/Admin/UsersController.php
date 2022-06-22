@@ -8,6 +8,8 @@ use App\Http\Requests\Admin\User\DestroyUser;
 use App\Http\Requests\Admin\User\IndexUser;
 use App\Http\Requests\Admin\User\StoreUser;
 use App\Http\Requests\Admin\User\UpdateUser;
+use App\Models\CampaignOwner;
+use App\Models\OwnerLocation;
 use App\Models\User;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -65,8 +67,16 @@ class UsersController extends Controller
     public function create()
     {
         $this->authorize('admin.user.create');
+        $owner_locations = OwnerLocation::with(['campaign_owner','city'])
+        ->orderBy('campaign_owner_id', 'ASC')
+        ->orderBy('city_id', 'ASC')
+        ->get();
 
-        return view('admin.user.create');
+        $owner_locations->each(function ($query) {
+            $query->name = mb_strtoupper("{$query->campaign_owner->name} - {$query->city->name} - {$query->name}");
+        });
+
+        return view('admin.user.create', ['owner_locations' => $owner_locations]);
     }
 
     /**
@@ -83,6 +93,11 @@ class UsersController extends Controller
         // Store the User
         $sanitized['password'] = Hash::make($sanitized['password']);
         $user = User::create($sanitized);
+
+        // pivot options
+        if ($request->input('owner_locations')) {
+            $user->owner_locations()->sync(collect($request->input('owner_locations', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return ['redirect' => url('admin/users'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
@@ -115,10 +130,27 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $this->authorize('admin.user.edit', $user);
+        $user->load('owner_locations');
+
+        //necesario para cambiar el nombre de las relaciones seleccionadas
+        $user->owner_locations->each(function ($query) {
+            $query->name = mb_strtoupper("{$query->campaign_owner->name} - {$query->city->name} - {$query->name}");
+        });
+
+        //necesario para cambiar el nombre al listado
+        $owner_locations = OwnerLocation::with(['campaign_owner','city'])
+        ->orderBy('campaign_owner_id', 'ASC')
+        ->orderBy('city_id', 'ASC')
+        ->get();
+
+        $owner_locations->each(function ($query) {
+            $query->name = mb_strtoupper("{$query->campaign_owner->name} - {$query->city->name} - {$query->name}");
+        });
 
 
         return view('admin.user.edit', [
             'user' => $user,
+            'owner_locations' => $owner_locations,
         ]);
     }
 
@@ -133,10 +165,18 @@ class UsersController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
-        $sanitized['password'] = Hash::make($sanitized['password']);
+
+        if(isset($sanitized['password'])){
+            $sanitized['password'] = Hash::make($sanitized['password']);
+        }
 
         // Update changed values User
         $user->update($sanitized);
+
+        // pivot options
+        if ($request->input('owner_locations')) {
+            $user->owner_locations()->sync(collect($request->input('owner_locations', []))->map->id->toArray());
+        }
 
         if ($request->ajax()) {
             return [
