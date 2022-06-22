@@ -22,6 +22,12 @@ class OwnerLocation extends Model
     ];
 
     /* m:m */
+    public function campaigns()
+    {
+        return $this->belongsToMany('App\Models\Campaign');
+    }
+
+    /* m:m */
     public function users()
     {
         return $this->belongsToMany('App\Models\User');

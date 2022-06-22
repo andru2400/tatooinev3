@@ -20,6 +20,12 @@ class Campaign extends Model
     ];
 
     /* m:m */
+    public function owner_locations()
+    {
+        return $this->belongsToMany('App\Models\OwnerLocation')->withPivot('status');
+    }
+
+    /* m:m */
     public function fields()
     {
         return $this->belongsToMany('App\Models\Field')->withPivot('id');
