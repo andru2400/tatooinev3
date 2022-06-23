@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UserAttributeOption\DestroyUserAttributeOption;
 use App\Http\Requests\Admin\UserAttributeOption\IndexUserAttributeOption;
 use App\Http\Requests\Admin\UserAttributeOption\StoreUserAttributeOption;
 use App\Http\Requests\Admin\UserAttributeOption\UpdateUserAttributeOption;
+use App\Models\UserAttribute;
 use App\Models\UserAttributeOption;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
@@ -32,7 +33,11 @@ class UserAttributeOptionsController extends Controller
     public function index(IndexUserAttributeOption $request)
     {
         // create and AdminListing instance for a specific model and
-        $data = AdminListing::create(UserAttributeOption::class)->processRequestAndGet(
+        $data = AdminListing::create(UserAttributeOption::class)
+        ->modifyQuery(function($query){
+            $query->with('user_attribute');
+         })
+        ->processRequestAndGet(
             // pass the request with params
             $request,
 
@@ -64,8 +69,9 @@ class UserAttributeOptionsController extends Controller
     public function create()
     {
         $this->authorize('admin.user-attribute-option.create');
+        $user_attributes = UserAttribute::get();
 
-        return view('admin.user-attribute-option.create');
+        return view('admin.user-attribute-option.create',['user_attributes' => $user_attributes]);
     }
 
     /**
@@ -113,10 +119,12 @@ class UserAttributeOptionsController extends Controller
     public function edit(UserAttributeOption $userAttributeOption)
     {
         $this->authorize('admin.user-attribute-option.edit', $userAttributeOption);
-
+        $userAttributeOption->user_attribute_id = (string)$userAttributeOption->user_attribute_id;
+        $user_attributes = UserAttribute::get();
 
         return view('admin.user-attribute-option.edit', [
             'userAttributeOption' => $userAttributeOption,
+            'user_attributes' => $user_attributes,
         ]);
     }
 

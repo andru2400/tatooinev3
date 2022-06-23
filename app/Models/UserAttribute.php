@@ -13,16 +13,22 @@ class UserAttribute extends Model
         'unique',
         'required',
         'status',
-    
+
     ];
-    
-    
+
+
     protected $dates = [
         'created_at',
         'updated_at',
-    
+
     ];
-    
+
+    /* 1:m */
+    public function user_attribute_options()
+    {
+        return $this->hasMany(UserAttributeOption::class);
+    }
+
     protected $appends = ['resource_url'];
 
     /* ************************ ACCESSOR ************************* */
