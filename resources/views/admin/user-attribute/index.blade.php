@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="col-sm-auto form-group ">
                                         <select class="form-control" v-model="pagination.state.per_page">
-                                            
+
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="100">100</option>
@@ -82,11 +82,24 @@
                                     <td>@{{ item.id }}</td>
                                         <td>@{{ item.name }}</td>
                                         <td>@{{ item.description }}</td>
-                                        <td>@{{ item.islist }}</td>
+                                        {{-- <td>@{{ item.islist }}</td>
                                         <td>@{{ item.unique }}</td>
                                         <td>@{{ item.required }}</td>
-                                        <td>@{{ item.status }}</td>
-                                        
+                                        <td>@{{ item.status }}</td> --}}
+
+                                        <td>
+                                            <span class="badge" :class="item.islist == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                        </td>
+                                        <td>
+                                            <span class="badge" :class="item.unique == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                        </td>
+                                        <td>
+                                            <span class="badge" :class="item.required == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                        </td>
+                                        <td>
+                                            <span class="badge" :class="item.status == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                        </td>
+
                                         <td>
                                             <div class="row no-gutters">
                                                 <div class="col-auto">
