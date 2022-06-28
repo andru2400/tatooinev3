@@ -88,13 +88,13 @@
                                         <td>@{{ item.status }}</td> --}}
 
                                         <td>
-                                            <span class="badge" :class="item.islist == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                            <span class="badge" :class="item.islist == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.islist == 1 ? 'Activo' : 'Inactivo'"></span>
                                         </td>
                                         <td>
-                                            <span class="badge" :class="item.unique == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                            <span class="badge" :class="item.unique == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.unique == 1 ? 'Activo' : 'Inactivo'"></span>
                                         </td>
                                         <td>
-                                            <span class="badge" :class="item.required == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
+                                            <span class="badge" :class="item.required == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.required == 1 ? 'Activo' : 'Inactivo'"></span>
                                         </td>
                                         <td>
                                             <span class="badge" :class="item.status == 1 ? 'badge-success text-white' : 'badge-danger text-white'" v-text="item.status == 1 ? 'Activo' : 'Inactivo'"></span>
