@@ -49,3 +49,44 @@
         <div v-if="errors.has('owner_locations')" class="form-control-feedback form-text" v-cloak>@{{ errors.first('owner_locations') }}</div>
     </div>
 </div>
+
+<hr/>
+
+@foreach ($user_attributes as $item)
+    @if ($item->islist == '1')
+        @if ($item->unique == '1')
+
+            <div class="form-group row align-items-center">
+                <label for="{{ $item->name }}" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{$item->name}}</label>
+                    <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+                        <select v-model='{{"form.$item->name"}}' class="form-control" id="{{$item->name}}" name="{{$item->name}}">
+                            <option disabled value="">Seleccione ...</option>
+                        @foreach($item->user_attribute_options as $option)
+                            <option value="{{$option->id}}">{{$option->value}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+        @else
+
+            <div class="form-group row align-items-center">
+                <label for='{{$item->name}}' class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ $item->name }}</label>
+                <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+                    <multiselect v-model='{{"form.$item->name"}}' placeholder={{"Seleccione $item->name"}} label="value" track-by="id" :options="{{ $item->user_attribute_options }}" :multiple="true" open-direction="bottom"></multiselect>
+                </div>
+            </div>
+
+        @endif
+
+    @else
+
+        <div class="form-group row align-items-center">
+            <label for='{{$item->name}}' class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ $item->name }}</label>
+                <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
+                    <input type="text" v-model='{{"form.$item->name"}}' class="form-control"  id="{{$item->name}}" name="{{$item->name}}" placeholder='{{"Escriba $item->name"}}' autocomplete="off">
+                </div>
+        </div>
+
+    @endif
+@endforeach

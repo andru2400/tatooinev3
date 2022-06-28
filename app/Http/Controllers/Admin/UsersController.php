@@ -11,6 +11,7 @@ use App\Http\Requests\Admin\User\UpdateUser;
 use App\Models\CampaignOwner;
 use App\Models\OwnerLocation;
 use App\Models\User;
+use App\Models\UserAttribute;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -76,7 +77,12 @@ class UsersController extends Controller
             $query->name = mb_strtoupper("{$query->campaign_owner->name} - {$query->city->name} - {$query->name}");
         });
 
-        return view('admin.user.create', ['owner_locations' => $owner_locations]);
+        $user_attributes = UserAttribute::get();
+
+        return view('admin.user.create', [
+                                            'owner_locations' => $owner_locations,
+                                            'user_attributes' => $user_attributes
+                                         ]);
     }
 
     /**
