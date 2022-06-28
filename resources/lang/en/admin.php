@@ -1,6 +1,13 @@
 <?php
 
 return [
+
+    'sidebar' => [
+        'campaign_settings'     => 'Configuración de campaña',
+        'user_front_settings'   => 'Administración de leads y usuarios',
+        'user_back_settings'    => 'Administración del sistema',
+    ],
+
     'admin-user' => [
         'title' => 'Users',
 
@@ -23,10 +30,10 @@ return [
             'activated' => 'Activated',
             'forbidden' => 'Forbidden',
             'language' => 'Language',
-                
+
             //Belongs to many relations
             'roles' => 'Roles',
-                
+
         ],
     ],
 
@@ -45,7 +52,7 @@ return [
             'email' => 'Email',
             'email_verified_at' => 'Email verified at',
             'password' => 'Password',
-            
+
         ],
     ],
 
@@ -62,7 +69,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'value' => 'Value',
-            
+
         ],
     ],
 
@@ -79,7 +86,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'validation_string' => 'Validation string',
-            
+
         ],
     ],
 
@@ -97,7 +104,7 @@ return [
             'name' => 'Name',
             'field_type_id' => 'Field type',
             'description' => 'Description',
-            
+
         ],
     ],
 
@@ -114,7 +121,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'description' => 'Description',
-            
+
         ],
     ],
 
@@ -131,7 +138,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -148,7 +155,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'guard_name' => 'Guard name',
-            
+
         ],
     ],
 
@@ -165,7 +172,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'guard_name' => 'Guard name',
-            
+
         ],
     ],
 
@@ -182,7 +189,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -198,7 +205,7 @@ return [
         'columns' => [
             'id' => 'ID',
             'name' => 'Name',
-            
+
         ],
     ],
 
@@ -215,7 +222,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'country_id' => 'Country',
-            
+
         ],
     ],
 
@@ -232,7 +239,7 @@ return [
             'id' => 'ID',
             'name' => 'Name',
             'departament_id' => 'Departament',
-            
+
         ],
     ],
 
@@ -251,7 +258,7 @@ return [
             'campaign_owner_id' => 'Campaign owner',
             'city_id' => 'City',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -272,7 +279,7 @@ return [
             'unique' => 'Unique',
             'required' => 'Required',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -289,7 +296,7 @@ return [
             'id' => 'ID',
             'value' => 'Value',
             'user_attribute_id' => 'User attribute',
-            
+
         ],
     ],
 
@@ -310,7 +317,7 @@ return [
             'unique' => 'Unique',
             'required' => 'Required',
             'status' => 'Status',
-            
+
         ],
     ],
 
@@ -327,7 +334,7 @@ return [
             'id' => 'ID',
             'value' => 'Value',
             'campaign_attribute_id' => 'Campaign attribute',
-            
+
         ],
     ],
 
