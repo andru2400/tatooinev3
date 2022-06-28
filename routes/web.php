@@ -283,3 +283,33 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('campaign-attributes')->name('campaign-attributes/')->group(static function() {
+            Route::get('/',                                             'CampaignAttributesController@index')->name('index');
+            Route::get('/create',                                       'CampaignAttributesController@create')->name('create');
+            Route::post('/',                                            'CampaignAttributesController@store')->name('store');
+            Route::get('/{campaignAttribute}/edit',                     'CampaignAttributesController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CampaignAttributesController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{campaignAttribute}',                         'CampaignAttributesController@update')->name('update');
+            Route::delete('/{campaignAttribute}',                       'CampaignAttributesController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('campaign-attribute-options')->name('campaign-attribute-options/')->group(static function() {
+            Route::get('/',                                             'CampaignAttributeOptionsController@index')->name('index');
+            Route::get('/create',                                       'CampaignAttributeOptionsController@create')->name('create');
+            Route::post('/',                                            'CampaignAttributeOptionsController@store')->name('store');
+            Route::get('/{campaignAttributeOption}/edit',               'CampaignAttributeOptionsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CampaignAttributeOptionsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{campaignAttributeOption}',                   'CampaignAttributeOptionsController@update')->name('update');
+            Route::delete('/{campaignAttributeOption}',                 'CampaignAttributeOptionsController@destroy')->name('destroy');
+        });
+    });
+});

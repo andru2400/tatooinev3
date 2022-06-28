@@ -293,5 +293,43 @@ return [
         ],
     ],
 
+    'campaign-attribute' => [
+        'title' => 'Campaign Attributes',
+
+        'actions' => [
+            'index' => 'Campaign Attributes',
+            'create' => 'New Campaign Attribute',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Name',
+            'description' => 'Description',
+            'islist' => 'Islist',
+            'unique' => 'Unique',
+            'required' => 'Required',
+            'status' => 'Status',
+            
+        ],
+    ],
+
+    'campaign-attribute-option' => [
+        'title' => 'Campaign Attribute Options',
+
+        'actions' => [
+            'index' => 'Campaign Attribute Options',
+            'create' => 'New Campaign Attribute Option',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'value' => 'Value',
+            'campaign_attribute_id' => 'Campaign attribute',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

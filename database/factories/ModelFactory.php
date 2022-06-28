@@ -191,3 +191,29 @@ $factory->define(App\Models\UserAttributeOption::class, static function (Faker\G
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\CampaignAttribute::class, static function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->firstName,
+        'description' => $faker->sentence,
+        'islist' => $faker->boolean(),
+        'unique' => $faker->boolean(),
+        'required' => $faker->boolean(),
+        'status' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\CampaignAttributeOption::class, static function (Faker\Generator $faker) {
+    return [
+        'value' => $faker->sentence,
+        'campaign_attribute_id' => $faker->sentence,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

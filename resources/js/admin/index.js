@@ -16,3 +16,5 @@ import './city';
 import './owner-location';
 import './user-attribute';
 import './user-attribute-option';
+import './campaign-attribute';
+import './campaign-attribute-option';
