@@ -1,6 +1,13 @@
 <?php
 
 return [
+
+    'sidebar' => [
+        'campaign_settings'     => 'Configuración de campaña',
+        'user_front_settings'   => 'Administración de leads y usuarios',
+        'user_back_settings'    => 'Administración del sistema',
+    ],
+
     'admin-user' => [
         'title' => 'Usuarios',
 
@@ -293,6 +300,43 @@ return [
             'id' => 'ID',
             'value' => 'Valor',
             'user_attribute_id' => 'Atributo de usuario',
+
+        ],
+    ],
+
+    'campaign-attribute' => [
+        'title' => 'Atributos de campaña',
+
+        'actions' => [
+            'index' => 'Atributos de campaña',
+            'create' => 'Nuevo atributo de campaña',
+            'edit' => 'Editar :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'description' => 'Descripción',
+            'islist' => '¿Es lista?',
+            'unique' => '¿Es unico?',
+            'required' => '¿Es Requerido?',
+            'status' => 'Status',
+        ],
+    ],
+
+    'campaign-attribute-option' => [
+        'title' => 'Opciones atributos Campaña',
+
+        'actions' => [
+            'index' => 'Opciones de atributo de campaña',
+            'create' => 'Nueva opcion de atributo de campaña',
+            'edit' => 'Edita :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'value' => 'Valor',
+            'campaign_attribute_id' => 'Atributo de campaña',
 
         ],
     ],
