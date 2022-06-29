@@ -59,7 +59,7 @@
             <div class="form-group row align-items-center">
                 <label for="{{ $item->name }}" class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{$item->name}}</label>
                     <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-                        <select v-model='{{"form.$item->name"}}' class="form-control" id="{{$item->name}}" name="{{$item->name}}">
+                        <select v-model='{{"form.user_attributes.$item->name"}}' class="form-control" id="{{$item->name}}" name="{{$item->name}}">
                             <option disabled value="">Seleccione ...</option>
                         @foreach($item->user_attribute_options as $option)
                             <option value="{{$option->id}}">{{$option->value}}</option>
@@ -73,7 +73,7 @@
             <div class="form-group row align-items-center">
                 <label for='{{$item->name}}' class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ $item->name }}</label>
                 <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-                    <multiselect v-model='{{"form.$item->name"}}' placeholder={{"Seleccione $item->name"}} label="value" track-by="id" :options="{{ $item->user_attribute_options }}" :multiple="true" open-direction="bottom"></multiselect>
+                    <multiselect v-model='{{"form.user_attributes.$item->name"}}' placeholder={{"Seleccione $item->name"}} label="value" track-by="id" :options="{{ $item->user_attribute_options }}" :multiple="true" open-direction="bottom"></multiselect>
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
         <div class="form-group row align-items-center">
             <label for='{{$item->name}}' class="col-form-label text-md-right" :class="isFormLocalized ? 'col-md-4' : 'col-md-2'">{{ $item->name }}</label>
                 <div :class="isFormLocalized ? 'col-md-4' : 'col-md-9 col-xl-8'">
-                    <input type="text" v-model='{{"form.$item->name"}}' class="form-control"  id="{{$item->name}}" name="{{$item->name}}" placeholder='{{"Escriba $item->name"}}' autocomplete="off">
+                    <input type="text" v-model='{{"form.user_attributes.$item->name"}}' class="form-control"  id="{{$item->name}}" name="{{$item->name}}" placeholder='{{"Escriba $item->name"}}' autocomplete="off">
                 </div>
         </div>
 
