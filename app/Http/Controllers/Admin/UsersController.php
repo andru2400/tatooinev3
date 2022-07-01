@@ -12,6 +12,7 @@ use App\Models\CampaignOwner;
 use App\Models\OwnerLocation;
 use App\Models\User;
 use App\Models\UserAttribute;
+use App\Models\UserAttributeValue;
 use Brackets\AdminListing\Facades\AdminListing;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -105,11 +106,42 @@ class UsersController extends Controller
             $user->owner_locations()->sync(collect($request->input('owner_locations', []))->map->id->toArray());
         }
 
+        // Llena user_attribute_values
+        foreach ($request->user_attributes as $key => $value) {
+            $user_attribute_temp                        = UserAttribute::where('name', $key)->first();  /* Busca el atributo para validar unos datos*/
+
+            if($user_attribute_temp->islist == 1){                                                      /* Si Es lista (Select) */
+
+                if($user_attribute_temp->unique == 1){                                                  /* Si es Select Unico */
+                    $this->saveUserAtributeValue($user->id, $user_attribute_temp->id, $value, null);
+                }else{                                                                                  /* Si es Select Multiple */
+                    foreach ($value as $key2 => $value2) {
+                        $this->saveUserAtributeValue($user->id, $user_attribute_temp->id, $value2['id'], null);
+                    }
+                }
+            }else{                                                                                      /* Si es (Input) */
+                $this->saveUserAtributeValue($user->id, $user_attribute_temp->id, null, $value);
+            }
+        }
+
         if ($request->ajax()) {
             return ['redirect' => url('admin/users'), 'message' => trans('brackets/admin-ui::admin.operation.succeeded')];
         }
 
         return redirect('admin/users');
+    }
+
+    public function saveUserAtributeValue($userId, $userAttributeId, $userAttributeOptionId, $value){
+
+        $user_attribute_value                              = new UserAttributeValue();
+        $user_attribute_value->user_id                     = $userId;
+        $user_attribute_value->user_attribute_id           = $userAttributeId;
+        $user_attribute_value->user_attribute_option_id    = $userAttributeOptionId;
+        $user_attribute_value->value                       = $value;
+        $user_attribute_value->save();
+
+        return $user_attribute_value;
+
     }
 
     /**
